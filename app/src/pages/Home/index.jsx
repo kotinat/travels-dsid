@@ -1,21 +1,28 @@
-import React from 'react';
+import React from "react";
 
-import Header from '../../components/Header';
-import Search from '../../components/Search';
-import Accomodations from '../../components/Accomodations';
-import Benefits from '../../components/Benefits';
+import { Link } from "react-router-dom";
 
-import './home.css';
+import Header from "../../components/Header";
+import Search from "../../components/Search";
+import Accomodations from "../../components/Accomodations";
+import Benefits from "../../components/Benefits";
+
+import "./home.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="page-home">
       <Header />
       <Search />
-      <Accomodations />
-      <Benefits />
+      <main>
+        <Accomodations />
+        <Benefits />
+        <Link to="/accomodations-list">
+          <strong>testa aeee</strong>
+        </Link>
+      </main>
     </div>
   );
-}
+};
 
 export default Home;
