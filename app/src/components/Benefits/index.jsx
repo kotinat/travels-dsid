@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     display: "flex",
     alignItems: "center",
-    fontFamily: 'ubuntu',
+    fontFamily: "ubuntu",
   },
 }));
 const Benefits = () => {
@@ -27,7 +27,7 @@ const Benefits = () => {
   return (
     <div className={classes.root}>
       {[0, 1, 2, 3].map((item) => (
-        <Paper className={classes.paragraph} elevation={0}>
+        <Paper className={classes.paragraph} elevation={0} key={item}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
             blanditiis tenetur unde suscipit, quam beatae rerum inventore

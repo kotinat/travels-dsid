@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import DatePicker from "../DatePicker";
+import SearchCityInput from "../SearchCityInput";
 
 const useStyles = makeStyles((theme) => ({
   inputs: {
@@ -21,25 +22,26 @@ const Search = () => {
 
   return (
     <div className="container-search">
-      <form>
+      {/* <form> */}
         <Grid container className={classes.inputs}>
-          <Grid item xs={"12"}>
-            <TextField
+          <Grid item xs={12}>
+            {/* <TextField
               id="standard-basic"
               placeholder="Digite aqui a cidade do seu próximo destino."
               style={{ width: "50%" }}
-            />
+            /> */}
+            <SearchCityInput />
           </Grid>
-          <Grid item xs={"3"}>
+          <Grid item xs={3}>
             <DatePicker label="Entrada" />
           </Grid>
-          <Grid item xs={"3"}>
-            <DatePicker label="Saída" />
+          <Grid item xs={3}>
+            <DatePicker label="Saída"/>
           </Grid>
-          <Grid item xs={"12"}>
+          <Grid item xs={12}>
             <TextField
               id="standard-basic"
-              placeholder="Digite aqui a cidade do seu próximo destino."
+              placeholder="Selecione a quantidade de pessoas"
               type="number"
             />
           </Grid>
@@ -54,7 +56,7 @@ const Search = () => {
             </Button>
           </Grid>
         </Grid>
-      </form>
+      {/* </form> */}
     </div>
   );
 };
