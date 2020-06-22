@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  font: {
+    fontFamily: "ubuntu",
+  },
 }));
 
 const Search = () => {
@@ -40,8 +43,12 @@ const Search = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained" color="secondary">
-              Buscar
+            <Button
+              className={classes.font}
+              variant="contained"
+              color="primary"
+            >
+              Procurar
             </Button>
           </Grid>
         </Grid>

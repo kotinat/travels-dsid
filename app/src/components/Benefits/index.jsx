@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     display: "flex",
     alignItems: "center",
+    fontFamily: 'ubuntu',
   },
 }));
 const Benefits = () => {
