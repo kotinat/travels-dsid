@@ -40,6 +40,7 @@ const Search = () => {
             <TextField
               id="standard-basic"
               placeholder="Digite aqui a cidade do seu próximo destino."
+              type="number"
             />
           </Grid>
           <Grid item xs={12}>
@@ -47,6 +48,7 @@ const Search = () => {
               className={classes.font}
               variant="contained"
               color="primary"
+              type="submit"
             >
               Procurar
             </Button>
