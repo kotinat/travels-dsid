@@ -1,15 +1,13 @@
-import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, {useState} from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-// import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-// import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-// import SkipNextIcon from '@material-ui/icons/SkipNext';
 import london from "../../assets/img/london.jpg";
+
+import { getAccomodationDetailById } from "../../services/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,16 +36,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getStars(starNumber) {
-  var result = '';
+  var result = "";
   for (var i = 0; i < starNumber; i++) {
-    result = result.concat("✮")
+    result = result.concat("✮");
   }
   return result;
 }
 
 const CardAccomodation = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
+  const [showDetails, setShowDetails] = useState(false);
+  const [details, setDetails] = useState(null);
+
+  async function handleOquevocequiser(){
+    const ansioso = await getAccomodationDetailById(props.id);
+    setDetails(ansioso);
+    // setShowDetails(!showDetails);
+  }
 
   return (
     <Card className={classes.root}>
@@ -65,9 +71,10 @@ const CardAccomodation = (props) => {
             {getStars(props.stars)}
           </Typography>
           <Typography>{`Preço por noite: ${props.price}`}</Typography>
-          <Button>Detalhes</Button>
+          <Button onClick={handleOquevocequiser}>Detalhes</Button>
         </CardContent>
       </div>
+      <div>{JSON.stringify(details)}</div>
     </Card>
   );
 };

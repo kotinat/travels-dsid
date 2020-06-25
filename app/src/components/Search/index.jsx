@@ -4,8 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicDatePicker from "../BasicDatePicker";
-import SearchCityInput from "../SearchCityInput";
-
 
 const useStyles = makeStyles((theme) => ({
   inputs: {
@@ -23,21 +21,20 @@ const Search = (props) => {
   const [city, setCity] = useState("");
   const [entryDate, setEntryDate] = useState(new Date());
   const [departureDate, setDepartureDate] = useState(new Date());
-  const [guest, setGuest] = useState('0');
+  const [guest, setGuest] = useState("0");
 
   function handleSubmit() {
     props.onSearch({
       city: city,
       entryDate: entryDate,
       departureDate: departureDate,
-      guest: guest
+      guest: guest,
     });
   }
 
   function handleCityChange(event) {
     setCity(event.target.value);
-    if(event.target.value == 'natalia')
-      props.onNatalia();
+    if (event.target.value === "natalia") props.onNatalia();
   }
 
   function handleEntryDateChange(event) {
@@ -48,20 +45,14 @@ const Search = (props) => {
     setDepartureDate(event.target.value);
   }
 
-  function handleGuestChange(event){
+  function handleGuestChange(event) {
     setGuest(event.target.value);
   }
 
   return (
     <div className="container-search">
-      {/* <form> */}
       <Grid container className={classes.inputs}>
         <Grid item xs={12}>
-          {/* <TextField
-              id="standard-basic"
-              placeholder="Digite aqui a cidade do seu próximo destino."
-              style={{ width: "50%" }}
-            /> */}
           <TextField onChange={handleCityChange} />
         </Grid>
         <Grid item xs={3}>
@@ -97,13 +88,11 @@ const Search = (props) => {
             color="primary"
             type="submit"
             onClick={handleSubmit}
-            
           >
             Procurar
           </Button>
         </Grid>
       </Grid>
-      {/* </form> */}
     </div>
   );
 };
