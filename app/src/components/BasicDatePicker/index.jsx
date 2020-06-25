@@ -1,19 +1,18 @@
-import "date-fns";
-import React from "react";
+// import "date-fns";
+import React, { useState } from "react";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+// import TextField from "@material-ui/core/TextField";
 
-const DatePicker = (props) => {
+const BasicDatePicker = (props) => {
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  // const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    props.setSelectedDate(date);
   };
 
   return (
@@ -22,16 +21,22 @@ const DatePicker = (props) => {
         disableToolbar
         variant="inline"
         format="dd/MM/yyyy"
-        margin="normal"
         label={props.label}
-        value={selectedDate}
+        id={props.id}
+        value={props.selectedDate} // props.selectedDate
         onChange={handleDateChange}
         KeyboardButtonProps={{
           "aria-label": "change date",
         }}
       />
     </MuiPickersUtilsProvider>
+    // <TextField
+    //   value={selectedDate}
+    //   onChange={setSelectedDate}
+    //   type="date"
+    //   onClick={setSelectedDate}
+    //   format="dd-MM-yyyy"
+    // />
   );
 };
-
-export default DatePicker;
+export default BasicDatePicker;

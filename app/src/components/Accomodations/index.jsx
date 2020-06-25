@@ -11,13 +11,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Accomodations = () => {
+const Accomodations = (props) => {
   const classes = useStyles();
-
+  console.log(props);
   return (
     <div>
+      <pre>{JSON.stringify(props, null, 2)}</pre>
       <Grid container className={classes.spacing}>
-        {[0, 1, 2, 3].map((value) => (
+        {props.data.data.suggestions.map((value) => (
           <Grid key={value} item>
             <Card />
           </Grid>
