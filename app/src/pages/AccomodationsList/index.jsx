@@ -13,6 +13,8 @@ const AccomodationsList = (props) => {
             stars={accomodation.rating}
             price={accomodation.price}
             id={accomodation.id}
+            src={accomodation.image.src}
+            alt={accomodation.image.name}
           />
         ))}
       </div>

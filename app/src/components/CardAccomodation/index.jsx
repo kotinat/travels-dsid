@@ -58,7 +58,8 @@ const CardAccomodation = (props) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.cover}
-        image={props.image}
+        image={props.src}
+        alt={props.alt}
         title={`${props.name}`}
       />
       <div className={classes.details}>

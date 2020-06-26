@@ -30,6 +30,10 @@ const Search = (props) => {
       departureDate: departureDate,
       guest: guest,
     });
+    // console.log("cidade: ", city);
+    // console.log("data1: ", entryDate);
+    // console.log("data2: ", departureDate);
+    // console.log("pessoas: ", guest);
   }
 
   function handleCityChange(event) {

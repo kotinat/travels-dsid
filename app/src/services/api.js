@@ -28,8 +28,10 @@ export const getAccomodationsById = async (cityId) => {
       locale: "pt_BR",
       destinationId: cityId,
       pageNumber: 1,
-      checkIn: "2020-07-25",
-      checkOut: "2020-07-27",
+      // aqui vem o entryDate
+      checkIn: "2020-07-27",
+      // aqui vem o departureDate
+      checkOut: "2020-07-30",
       pageSize: 5,
       adults1: 2,
     },
@@ -72,6 +74,7 @@ export const getAccomodationDetailById = async (id) => {
   const { data } = result.data;
   const { body } = data;
   const { name, starRating } = body.propertyDescription;
+  const { latitude, longitude } = body.pdpHeader.hotelLocation.coordinates;
 
   return {
     name,
@@ -82,8 +85,8 @@ export const getAccomodationDetailById = async (id) => {
     },
     amenities: body.overview.overviewSections[0].content,
     location: {
-      latitude: body.pdpHeader.hotelLocation.coordinates.latitude,
-      longitude: body.pdpHeader.hotelLocation.coordinates.longitude,
+      latitude,
+      longitude,
     },
   };
 };

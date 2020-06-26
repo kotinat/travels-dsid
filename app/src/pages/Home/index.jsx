@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 // componentes prontos
-import { Link } from "react-router-dom";
 
 // meus componentes
 import Header from "../../components/Header";
@@ -29,12 +28,7 @@ const Home = () => {
     <div className="page-home">
       <Header />
       <Search onSearch={handleSearch} />
-      <main>
-        {showList && <AccomodationsList data={data} />}
-        <Link to="/accomodations-list">
-          <strong>testa aeee</strong>
-        </Link>
-      </main>
+      {showList && <AccomodationsList data={data} />}
     </div>
   );
 };
