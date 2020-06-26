@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import london from "../../assets/img/london.jpg";
 
 import { getAccomodationDetailById } from "../../services/api";
 
@@ -49,18 +48,18 @@ const CardAccomodation = (props) => {
   const [showDetails, setShowDetails] = useState(false);
   const [details, setDetails] = useState(null);
 
-  async function handleOquevocequiser(){
+  async function handleOquevocequiser() {
     const ansioso = await getAccomodationDetailById(props.id);
     setDetails(ansioso);
-    // setShowDetails(!showDetails);
+    setShowDetails(!showDetails);
   }
 
   return (
     <Card className={classes.root}>
       <CardMedia
         className={classes.cover}
-        image={london}
-        title="Live from space album cover"
+        image={props.image}
+        title={`${props.name}`}
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -70,7 +69,7 @@ const CardAccomodation = (props) => {
           <Typography variant="subtitle1" color="textSecondary">
             {getStars(props.stars)}
           </Typography>
-          <Typography>{`Preço por noite: ${props.price}`}</Typography>
+          <Typography>{`R$${props.price}/noite`}</Typography>
           <Button onClick={handleOquevocequiser}>Detalhes</Button>
         </CardContent>
       </div>

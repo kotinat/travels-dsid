@@ -1,41 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
+// componentes prontos
 import { Link } from "react-router-dom";
 
+// meus componentes
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../AccomodationsList";
 
+// serviços
 import { getCityIdByName, getAccomodationsById } from "../../services/api";
-import axios from "axios";
 
+// estilos
 import "./home.css";
 
 const Home = () => {
-  // um pouco de como buscar os dados da API
   const [data, setData] = useState([]);
-  // teste pra mostrar a lista de acomodações ao clicar no botão submit
   const [showList, setShowList] = useState(false);
 
   async function handleSearch(obj) {
-    // console.log(farofa);
-
     const cityId = await getCityIdByName(obj.city);
     const accomodationsList = await getAccomodationsById(cityId);
     setData(accomodationsList);
     setShowList(true);
   }
 
-  function handleNatalia(batata) {
-    console.log("IHA");
-  }
-
-  console.log("natalia", data);
-
   return (
     <div className="page-home">
       <Header />
-      <Search onSearch={handleSearch} onNatalia={handleNatalia} />
+      <Search onSearch={handleSearch} />
       <main>
         {showList && <AccomodationsList data={data} />}
         <Link to="/accomodations-list">

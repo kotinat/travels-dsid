@@ -34,7 +34,6 @@ const Search = (props) => {
 
   function handleCityChange(event) {
     setCity(event.target.value);
-    if (event.target.value === "natalia") props.onNatalia();
   }
 
   function handleEntryDateChange(event) {
@@ -53,7 +52,10 @@ const Search = (props) => {
     <div className="container-search">
       <Grid container className={classes.inputs}>
         <Grid item xs={12}>
-          <TextField onChange={handleCityChange} />
+          <TextField
+            placeholder="Digite aqui o seu próximo destino"
+            onChange={handleCityChange}
+          />
         </Grid>
         <Grid item xs={3}>
           <BasicDatePicker

@@ -14,6 +14,7 @@ export const getCityIdByName = async (city) => {
       },
     }
   );
+
   return result.data.suggestions[0].entities[0].destinationId;
 };
 
@@ -27,23 +28,25 @@ export const getAccomodationsById = async (cityId) => {
       locale: "pt_BR",
       destinationId: cityId,
       pageNumber: 1,
-      checkIn: "2020-06-25",
-      checkOut: "2020-06-27",
+      checkIn: "2020-07-25",
+      checkOut: "2020-07-27",
       pageSize: 5,
       adults1: 2,
     },
   });
 
-  const parsedResult = result.data.data.body.searchResults.results.map((item) => ({
-    id: item.id,
-    name: item.name,
-    image: {
-      src: item.thumbnailUrl,
+  const parsedResult = result.data.data.body.searchResults.results.map(
+    (item) => ({
+      id: item.id,
       name: item.name,
-    },
-    rating: item.starRating,
-    price: item.ratePlan.price.exactCurrent,
-  }));
+      image: {
+        src: item.thumbnailUrl,
+        name: item.name,
+      },
+      rating: item.starRating,
+      price: item.ratePlan.price.exactCurrent,
+    })
+  );
 
   return parsedResult;
 };
@@ -65,8 +68,6 @@ export const getAccomodationDetailById = async (id) => {
       },
     }
   );
-
-  console.log(result);
 
   const { data } = result.data;
   const { body } = data;
