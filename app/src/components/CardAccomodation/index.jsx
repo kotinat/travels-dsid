@@ -46,12 +46,16 @@ const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
   const [showDetails, setShowDetails] = useState(false);
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState();
 
-  async function handleOquevocequiser() {
+  async function handleShowDetails() {
     const ansioso = await getAccomodationDetailById(props.id);
     setDetails(ansioso);
     setShowDetails(!showDetails);
+    var parsedTeste = JSON.stringify(details);
+    localStorage.setItem("bora", parsedTeste);
+    console.log(parsedTeste);
+    // localStorage.getItem()
   }
 
   return (
@@ -71,7 +75,14 @@ const CardAccomodation = (props) => {
             {getStars(props.stars)}
           </Typography>
           <Typography>{`R$${props.price}/noite`}</Typography>
-          <Button onClick={handleOquevocequiser}>Detalhes</Button>
+          <Button
+            onClick={handleShowDetails}
+            color="secondary"
+            target="_blank"
+            href="/details"
+          >
+            Detalhes
+          </Button>
         </CardContent>
       </div>
       <div>{JSON.stringify(details)}</div>

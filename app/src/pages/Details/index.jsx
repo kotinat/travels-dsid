@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Details = () => {
+import { getAccomodationDetailById } from "../../services/api";
+
+const Details = (props) => {
+  // function handleSearch() {
+  //   props.onSearch({
+      
+  //   })
+  // }
+
+  // async function handleTest() {
+  //   const ansioso = await getAccomodationDetailById(props.id);
+  //   setDetails(ansioso);
+  // }
+
   return (
     <div>
       <h1>Detalhes</h1>
