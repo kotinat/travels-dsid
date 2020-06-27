@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios from "axios"
+import { transformDate }  from "../controllers/dateAccomodations"
+
 
 export const getCityIdByName = async (city) => {
   const result = await axios(
@@ -18,7 +20,13 @@ export const getCityIdByName = async (city) => {
 };
 
 export const getAccomodationsById = async (cityId) => {
+
+  const checkinDate = await transformDate('Fri Jul 26 2020 14:27:14 GMT-0300 (Horário Padrão de Brasília')
+
+  console.log(checkinDate)
+
   const result = await axios("https://hotels4.p.rapidapi.com/properties/list", {
+
     headers: {
       "x-rapidapi-host": "hotels4.p.rapidapi.com",
       "x-rapidapi-key": "c626a77cf3mshd941269529d5468p113f2bjsn3a0c3d574b63",
@@ -27,8 +35,8 @@ export const getAccomodationsById = async (cityId) => {
       locale: "pt_BR",
       destinationId: cityId,
       pageNumber: 1,
-      checkIn: "2020-06-25",
-      checkOut: "2020-06-27",
+      checkIn: checkinDate,
+      checkOut: "2020-07-27",
       pageSize: 5,
       adults1: 2,
     },
