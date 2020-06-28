@@ -59,7 +59,7 @@ export const getAccomodationDetailById = async (id) => {
     {
       headers: {
         "x-rapidapi-host": "hotels4.p.rapidapi.com",
-        "x-rapidapi-key": "c626a77cf3mshd941269529d5468p113f2bjsn3a0c3d574b63",
+        "x-rapidapi-key": "d5950d8e02mshdd95fe25e26b86fp1d723ejsn923735e66e08",
       },
       params: {
         locale: "pt_BR",
