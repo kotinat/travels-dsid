@@ -6,6 +6,8 @@ import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../AccomodationsList";
 
+import SearchLocationInput from '../../controllers/SearchLocationInput';
+
 import { getCityIdByName, getAccomodationsById } from "../../services/api";
 import axios from "axios";
 
@@ -35,6 +37,7 @@ const Home = () => {
   return (
     <div className="page-home">
       <Header />
+      <SearchLocationInput onChange={() => null} />
       <Search onSearch={handleSearch} onNatalia={handleNatalia} />
       <main>
         {showList && <AccomodationsList data={data} />}
