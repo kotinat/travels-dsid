@@ -21,7 +21,7 @@ export const getCityIdByName = async (city) => {
 
 export const getAccomodationsById = async (cityId) => {
 
-  const checkinDate = await transformDate('Fri Jul 26 2020 14:27:14 GMT-0300 (Horário Padrão de Brasília')
+  const checkinDate = await transformDate('Fri Jul 26 2020 14:27:14 GMT-0300 (Horário Padrão de Brasília') // Inserir data do datePicker
 
   console.log(checkinDate)
 
@@ -37,7 +37,7 @@ export const getAccomodationsById = async (cityId) => {
       pageNumber: 1,
       checkIn: checkinDate,
       checkOut: "2020-07-27",
-      pageSize: 5,
+      pageSize: 20,
       adults1: 2,
     },
   });
