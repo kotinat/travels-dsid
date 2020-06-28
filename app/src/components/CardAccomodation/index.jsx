@@ -5,7 +5,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+// import { Link } from "react-router-dom";
 
+import Details from "../../pages/Details";
 import { getAccomodationDetailById } from "../../services/api";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,10 +54,6 @@ const CardAccomodation = (props) => {
     const ansioso = await getAccomodationDetailById(props.id);
     setDetails(ansioso);
     setShowDetails(!showDetails);
-    var parsedTeste = JSON.stringify(details);
-    localStorage.setItem("bora", parsedTeste);
-    console.log(parsedTeste);
-    // localStorage.getItem()
   }
 
   return (
@@ -75,17 +73,22 @@ const CardAccomodation = (props) => {
             {getStars(props.stars)}
           </Typography>
           <Typography>{`R$${props.price}/noite`}</Typography>
-          <Button
-            onClick={handleShowDetails}
-            color="secondary"
-            target="_blank"
-            href="/details"
-          >
-            Detalhes
-          </Button>
+          {/* <Link to='/details'> */}
+            <Button
+              onClick={handleShowDetails}
+              color="secondary"
+              // target="_blank"
+              // href='/details'
+              teste={details}
+            >
+              Detalhes
+            </Button>
+          {/* </Link> */}
+
+          {/* <Link to="/details" target='_blank' accomodationDetails={details}>Detalhes teste</Link> */}
+          {showDetails && <Details props={details.name}/>}
         </CardContent>
       </div>
-      <div>{JSON.stringify(details)}</div>
     </Card>
   );
 };

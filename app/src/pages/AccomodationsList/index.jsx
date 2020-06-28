@@ -4,7 +4,7 @@ import CardAccomodation from "../../components/CardAccomodation";
 const AccomodationsList = (props) => {
   return (
     <div>
-      <h1>accomodations list</h1>
+      <h1>{`Resultados da busca`}</h1>
       <div>
         {props.data.map((accomodation, id) => (
           <CardAccomodation
