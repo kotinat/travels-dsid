@@ -6,6 +6,8 @@ import Paper from "@material-ui/core/Paper";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
+import './details.css'
+
 // import { getAccomodationDetailById } from "../../services/api";
 const details = {
   name: "Milano Hotel",
@@ -42,7 +44,7 @@ function getStars(starNumber) {
 
 const Details = () => {
   const position = [details.location.latitude, details.location.longitude];
-  console.log(position);
+
   return (
     <div>
       <Link to="/">Voltar para a busca</Link>
@@ -67,20 +69,20 @@ const Details = () => {
         </Typography>
       </Paper>
 
-      <Map center={position} zoom={15}>
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          height='200px'
-        />
-        {/* <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker> */}
-      </Map>
-
-      <div style={{ backgroundColor: "yellow" }}> teste</div>
+      <div className="leaflet-container">
+        <Map center={position} zoom={15}>
+          <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            height="200px"
+          />
+          <Marker position={position}>
+            <Popup>
+              {details.name}
+            </Popup>
+          </Marker>
+        </Map>
+      </div>
     </div>
   );
 };
