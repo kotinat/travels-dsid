@@ -56,22 +56,19 @@ export const getAccomodationsById = async (cityId) => {
 };
 
 export const getAccomodationDetailById = async (id) => {
-  const result = await axios(
-    "https://hotels4.p.rapidapi.com/properties/get-details",
-    {
-      headers: {
-        "x-rapidapi-host": "hotels4.p.rapidapi.com",
-        "x-rapidapi-key": "d5950d8e02mshdd95fe25e26b86fp1d723ejsn923735e66e08",
-      },
-      params: {
-        locale: "pt_BR",
-        id: id,
-        checkIn: "2020-06-25",
-        checkOut: "2020-06-27",
-        adults1: 2,
-      },
-    }
-  );
+  const result = await axios(process.env.API_URL, {
+    headers: {
+      "x-rapidapi-host": process.env.x_rapidapi_host,
+      "x-rapidapi-key": process.env.x_rapidapi_key,
+    },
+    params: {
+      locale: "pt_BR",
+      id: id,
+      checkIn: "2020-06-25",
+      checkOut: "2020-06-27",
+      adults1: 2,
+    },
+  });
 
   const { data } = result.data;
   const { body } = data;

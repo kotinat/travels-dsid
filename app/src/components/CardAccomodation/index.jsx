@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 // import { Link } from "react-router-dom";
 
-import Details from "../../pages/Details";
+// import Details from "../../pages/Details";
 // import { getAccomodationDetailById } from "../../services/api";
 
 const useStyles = makeStyles((theme) => ({
