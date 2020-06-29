@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 // import { Link } from "react-router-dom";
 
 import Details from "../../pages/Details";
-import { getAccomodationDetailById } from "../../services/api";
+// import { getAccomodationDetailById } from "../../services/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,8 +51,8 @@ const CardAccomodation = (props) => {
   const [details, setDetails] = useState();
 
   async function handleShowDetails() {
-    const ansioso = await getAccomodationDetailById(props.id);
-    setDetails(ansioso);
+    // const ansioso = await getAccomodationDetailById(props.id);
+    // setDetails(ansioso);
     setShowDetails(!showDetails);
   }
 
@@ -73,20 +73,18 @@ const CardAccomodation = (props) => {
             {getStars(props.stars)}
           </Typography>
           <Typography>{`R$${props.price}/noite`}</Typography>
-          {/* <Link to='/details'> */}
-            <Button
-              onClick={handleShowDetails}
-              color="secondary"
-              // target="_blank"
-              // href='/details'
-              teste={details}
-            >
-              Detalhes
-            </Button>
-          {/* </Link> */}
 
-          {/* <Link to="/details" target='_blank' accomodationDetails={details}>Detalhes teste</Link> */}
-          {showDetails && <Details props={details.name}/>}
+          <Button
+            onClick={handleShowDetails}
+            color="secondary"
+            // target="_blank"
+            href="/details"
+            teste={details}
+          >
+            Detalhes
+          </Button>
+
+          {/* {showDetails && <Details/>} */}
         </CardContent>
       </div>
     </Card>

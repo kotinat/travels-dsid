@@ -1,0 +1,70 @@
+{
+  "result": "OK",
+  "data": {
+    "body": {
+      "pdpHeader": {
+        "hotelId": "424023",
+        "destinationId": "1506246",
+        "pointOfSaleId": "HCOM_US",
+        "currencyCode": "USD",
+        "occupancyKey": "A1C5C11",
+        "hotelLocation": {
+          "resolvedLocation": "CITY:1506246:PROVIDED:PROVIDED",
+          "locationName": "New York",
+          "coordinates": {
+            "latitude": 40.752109,
+            "longitude": -73.985461
+          }
+        }
+      },
+      "propertyDescription": {
+        "clientToken": "CYiHvufw6u4pBHmZfikZFs-p_dM.",
+        "address": {
+          "countryName": "United States of America",
+          "cityName": "New York",
+          "postalCode": "10018",
+          "provinceName": "NY",
+          "addressLine1": "63 W 38th St",
+          "countryCode": "USA",
+          "pattern": "AddressLine1,#AddressLine2,#CityName,#ProvinceName,#PostalCode,#CountryName",
+          "fullAddress": "63 W 38th St, New York, NY, 10018, United States of America"
+        },
+        "priceMatchEnabled": true,
+        "name": "Refinery Hotel",
+        "starRatingTitle": "5 stars",
+        "starRating": 5,
+        "featuredPrice": {
+          "pricingTooltip": "This is the average nightly price for your dates.",
+          "currentPrice": {
+            "formatted": "$395",
+            "plain": 395
+          }
+        }
+      },
+      "overview": {
+        "overviewSections": [
+          {
+            "title":"Main amenities",
+            "type":"HOTEL_FEATURE",
+            "content":[
+
+              "197 smoke-free guestrooms",
+              "Restaurant and 2 bars/lounges",
+              "Rooftop terrace",
+              "Breakfast available",
+              "Fitness center",
+              "Valet parking",
+              "24-hour front desk",
+              "Air conditioning",
+              "Daily housekeeping",
+              "Front desk safe",
+              "ATM/banking services",
+              "Laundry service"
+            ],
+            "contentType":"LIST"
+          }
+        ]
+      }
+    }
+  }
+}
