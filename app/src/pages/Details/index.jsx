@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 // import { getAccomodationDetailById } from "../../services/api";
 
 const Details = (props) => {
@@ -19,14 +21,19 @@ const Details = (props) => {
   //   setDetails(ansioso);
   // }
 
-  console.log("Hospedagem: ", props);
+  // console.log("Hospedagem: ", props);
   return (
     <div>
+      <Link to="/">Voltar para a busca</Link>
+      <div>--------------------------</div>
+      <Link to="/register">Ir para o cadastro</Link>
+      
       <h1>Detalhes</h1>
       {/* <button onClick={handleDetails}>show details</button> */}
-      {props.map((item, k) => (
+      {/* {props.map((item, k) => (
         <p key={k}>{item}</p>
-      ))}
+      ))} */}
+      
     </div>
   );
 };

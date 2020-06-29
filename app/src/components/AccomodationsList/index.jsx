@@ -1,5 +1,5 @@
 import React from "react";
-import CardAccomodation from "../../components/CardAccomodation";
+import CardAccomodation from '../CardAccomodation';
 
 const AccomodationsList = (props) => {
   return (

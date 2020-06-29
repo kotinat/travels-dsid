@@ -2,15 +2,17 @@ import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
-import AccomodationsList from "./pages/AccomodationsList";
 import Details from "./pages/Details";
+import Register from "./pages/Register";
+import Payment from "./pages/Payment";
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Route component={Home} path="/" exact />
-      <Route component={AccomodationsList} path="/accomodations-list" />
       <Route component={Details} path="/details" />
+      <Route component={Register} path="/register" />
+      <Route component={Payment} path="/payment" />
     </BrowserRouter>
   );
 };

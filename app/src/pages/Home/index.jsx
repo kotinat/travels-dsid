@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 // componentes prontos
+import { Link } from "react-router-dom";
 
 // meus componentes
 import Header from "../../components/Header";
 import Search from "../../components/Search";
-import AccomodationsList from "../AccomodationsList";
+import AccomodationsList from "../../components/AccomodationsList";
+// import Details from '../Details'
 
 // serviços
 import { getCityIdByName, getAccomodationsById } from "../../services/api";
@@ -29,6 +31,7 @@ const Home = () => {
       <Header />
       <Search onSearch={handleSearch} />
       {showList && <AccomodationsList data={data} />}
+      <Link to='/details'>Go to details</Link>
     </div>
   );
 };
