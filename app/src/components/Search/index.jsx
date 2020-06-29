@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicDatePicker from "../BasicDatePicker";
 
+import Script from "react-load-script"
+
 const useStyles = makeStyles((theme) => ({
   inputs: {
     "& > *": {
@@ -34,7 +36,6 @@ const Search = (props) => {
 
   function handleCityChange(event) {
     setCity(event.target.value);
-    if (event.target.value === "natalia") props.onNatalia();
   }
 
   function handleEntryDateChange(event) {
