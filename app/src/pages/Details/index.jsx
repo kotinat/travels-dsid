@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
-import './details.css'
+import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api";
 const details = {
@@ -47,9 +47,15 @@ const Details = () => {
 
   return (
     <div>
-      <Link to="/">Voltar para a busca</Link>
-      <div>--------------------------</div>
-      <Link to="/register">Ir para o cadastro</Link>
+      <header>
+        <span>
+          <Link to="/">Voltar para a busca</Link>
+        </span>
+        <span>----|----</span>
+        <span>
+          <Link to="/register">Ir para o cadastro</Link>
+        </span>
+      </header>
 
       <h1>Detalhes</h1>
       <Paper>
@@ -77,9 +83,7 @@ const Details = () => {
             height="200px"
           />
           <Marker position={position}>
-            <Popup>
-              {details.name}
-            </Popup>
+            <Popup>{details.name}</Popup>
           </Marker>
         </Map>
       </div>

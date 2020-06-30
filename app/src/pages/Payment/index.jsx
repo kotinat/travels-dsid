@@ -5,9 +5,16 @@ import { Link } from "react-router-dom";
 const Payment = () => {
   return (
     <div>
-      <Link to="/register">Voltar para o cadastro</Link>
-      <div>--------------------------</div>
-      <Link to="/">Voltar para a Home</Link>
+      <header>
+        <span>
+          <Link to="/register">Voltar para o cadastro</Link>
+        </span>
+        <span>----|----</span>
+        <span>
+          <Link to="/">Voltar para a Home</Link>
+        </span>
+      </header>
+
       <h1>Pagamento</h1>
     </div>
   );
