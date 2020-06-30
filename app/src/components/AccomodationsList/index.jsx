@@ -15,6 +15,7 @@ const AccomodationsList = (props) => {
             id={accomodation.id}
             src={accomodation.image.src}
             alt={accomodation.image.name}
+            setAccomodationId={props.setAccomodationId}
           />
         ))}
       </div>

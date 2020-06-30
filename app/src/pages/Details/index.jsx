@@ -42,9 +42,9 @@ function getStars(starNumber) {
   return result;
 }
 
-const Details = () => {
+const Details = (props) => {
   const position = [details.location.latitude, details.location.longitude];
-
+  console.log(props);
   return (
     <div>
       <header>

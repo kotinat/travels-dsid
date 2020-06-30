@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -49,11 +50,14 @@ const CardAccomodation = (props) => {
   // const theme = useTheme();
   const [showDetails, setShowDetails] = useState(false);
   const [details, setDetails] = useState();
+  const [selectedAccomodation, setSelectedAccomodation] = useState([]);
 
   async function handleShowDetails() {
     // const ansioso = await getAccomodationDetailById(props.id);
     // setDetails(ansioso);
     setShowDetails(!showDetails);
+    props.setAccomodationId(props.id);
+    props.history.push('/details');
   }
 
   return (
@@ -77,9 +81,7 @@ const CardAccomodation = (props) => {
           <Button
             onClick={handleShowDetails}
             color="secondary"
-            // target="_blank"
-            href="/details"
-            teste={details}
+            // href='/details'
           >
             Detalhes
           </Button>
@@ -91,4 +93,4 @@ const CardAccomodation = (props) => {
   );
 };
 
-export default CardAccomodation;
+export default withRouter(CardAccomodation);
