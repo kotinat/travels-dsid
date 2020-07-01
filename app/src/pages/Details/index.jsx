@@ -7,32 +7,32 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
 import "./details.css";
 
-import { getAccomodationDetailById } from "../../services/api";
+// import { getAccomodationDetailById } from "../../services/api";
 
-// const details = {
-//   name: "Milano Hotel",
-//   rating: 2.5,
-//   price: {
-//     perNight: 67,
-//     final: 335,
-//   },
-//   amenities: [
-//     "29 quartos para não fumantes",
-//     "Serviço de arrumação (mediante solicitação)",
-//     "Bar/lounge",
-//     "Recepção 24 horas",
-//     "Ar-condicionado",
-//     "Um micro-ondas em uma área comum",
-//     "Lavanderia",
-//     "Jornais grátis no saguão",
-//     "TV na área comum",
-//     "Wi-Fi grátis",
-//   ],
-//   location: {
-//     latitude: -23.49742,
-//     longitude: -47.45506,
-//   },
-// };
+const details = {
+  name: "Milano Hotel",
+  rating: 2.5,
+  price: {
+    perNight: 67,
+    final: 335,
+  },
+  amenities: [
+    "29 quartos para não fumantes",
+    "Serviço de arrumação (mediante solicitação)",
+    "Bar/lounge",
+    "Recepção 24 horas",
+    "Ar-condicionado",
+    "Um micro-ondas em uma área comum",
+    "Lavanderia",
+    "Jornais grátis no saguão",
+    "TV na área comum",
+    "Wi-Fi grátis",
+  ],
+  location: {
+    latitude: -23.49742,
+    longitude: -47.45506,
+  },
+};
 
 function getStars(starNumber) {
   var result = "";
@@ -43,28 +43,32 @@ function getStars(starNumber) {
 }
 
 const Details = (props) => {
-  const [showDetails, setShowDetails] = useState(false);
-  const [details, setDetails] = useState();
+  const [showDetails, setShowDetails] = useState(true); // false
+  // const [details, setDetails] = useState();
   const position = () => [
     details.location.latitude,
     details.location.longitude,
   ];
 
-  async function handleSearchAccomodation(id) {
-    const ansioso = await getAccomodationDetailById(id);
-    setDetails(ansioso);
-    setShowDetails(true);
-  }
+  // Chamada na API, comentado para deixar mockado
+  // async function handleSearchAccomodation(id) {
+  //   const ansioso = await getAccomodationDetailById(id);
+  //   setDetails(ansioso);
+  //   setShowDetails(true);
+  // }
 
-  useEffect(() => {
-    handleSearchAccomodation(props.accomodationId);
-  }, []);
+  // Faz a chamada assim que o componente Details é renderizado
+  // useEffect(() => {
+  //   handleSearchAccomodation(props.accomodationId);
+  // }, []);
 
   async function handlePickAccomodation(e) {
     e.preventDefault();
     props.setAccomodation(details);
     props.history.push("/register");
   }
+
+  console.log(props);
 
   return (
     <div>
