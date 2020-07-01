@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Paper, Typography } from "@material-ui/core";
@@ -8,6 +8,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api";
+
 const details = {
   name: "Milano Hotel",
   rating: 2.5,
@@ -42,22 +43,32 @@ function getStars(starNumber) {
 }
 
 const Details = (props) => {
-  const position = [details.location.latitude, details.location.longitude];
-  const [showDetails, setShowDetails] = useState(false);
-  const [fake, setFake] = useState({ name: "Koti", idade: 24 });
+  const [showDetails, setShowDetails] = useState(true); // false
   // const [details, setDetails] = useState();
+  const position = () => [
+    details.location.latitude,
+    details.location.longitude,
+  ];
 
-  // async function handleSearchAccomodation(){
-  //   const ansioso = await getAccomodationDetailById(props.accomodationId);
+  // Chamada na API, comentado para deixar mockado
+  // async function handleSearchAccomodation(id) {
+  //   const ansioso = await getAccomodationDetailById(id);
   //   setDetails(ansioso);
+  //   setShowDetails(true);
   // }
 
-  async function handlePickAccomodation() {
-    // setShowDetails(!showDetails);
+  // Faz a chamada assim que o componente Details é renderizado
+  // useEffect(() => {
+  //   handleSearchAccomodation(props.accomodationId);
+  // }, []);
+
+  async function handlePickAccomodation(e) {
+    e.preventDefault();
     props.setAccomodation(details);
-    console.log(props)
-    // props.history.push("/register");
+    props.history.push("/register");
   }
+
+  console.log(props);
 
   return (
     <div>
@@ -72,38 +83,46 @@ const Details = (props) => {
       </header>
 
       <h1>Detalhes</h1>
-      <Paper>
-        <Typography variant="h3">{details.name}</Typography>
-        <Typography variant="body1">{getStars(details.rating)}</Typography>
-        <Typography variant="h5">
-          Comodidades
-          {details.amenities.map((comodidade, id) => (
-            <Typography key={id}>{comodidade}</Typography>
-          ))}
-        </Typography>
-        <Typography variant="h6">
-          {`${details.price.perNight}/noite`}
-        </Typography>
-        <Typography variant="h5">
-          {`Total da estadia, ${details.price.final}`}
-        </Typography>
-        <Button onClick={handlePickAccomodation} color="secondary">
-          Choose me!
-        </Button>
-      </Paper>
+      {showDetails && (
+        <div>
+          <Paper>
+            <Typography variant="h3">{details.name}</Typography>
+            <Typography variant="body1">{getStars(details.rating)}</Typography>
+            <Typography variant="h5">
+              Comodidades
+              {details.amenities.map((comodidade, id) => (
+                <Typography key={id}>{comodidade}</Typography>
+              ))}
+            </Typography>
+            <Typography variant="h6">
+              {`${details.price.perNight}/noite`}
+            </Typography>
+            <Typography variant="h5">
+              {`Total da estadia, ${details.price.final}`}
+            </Typography>
+            <Button
+              onClick={handlePickAccomodation}
+              variant="contained"
+              color="secondary"
+            >
+              Choose me!
+            </Button>
+          </Paper>
 
-      <div className="leaflet-container">
-        <Map center={position} zoom={15}>
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            height="200px"
-          />
-          <Marker position={position}>
-            <Popup>{details.name}</Popup>
-          </Marker>
-        </Map>
-      </div>
+          <div className="leaflet-container">
+            <Map center={position()} zoom={15}>
+              <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                height="200px"
+              />
+              <Marker position={position()}>
+                <Popup>{details.name}</Popup>
+              </Marker>
+            </Map>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

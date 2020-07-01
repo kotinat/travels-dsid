@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
-
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
@@ -79,8 +77,6 @@ const Home = (props) => {
     setShowList(true);
   }
 
-  // console.log(props)
-
   return (
     <div className="page-home">
       <Header />
@@ -91,7 +87,6 @@ const Home = (props) => {
           setAccomodationId={props.setAccomodationId}
         />
       )}
-      <Link to="/details">Go to details</Link>
     </div>
   );
 };

@@ -6,9 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-// import { Link } from "react-router-dom";
 
-// import Details from "../../pages/Details";
 // import { getAccomodationDetailById } from "../../services/api";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,16 +46,16 @@ function getStars(starNumber) {
 const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
+  // const [details, setDetails] = useState();
   const [showDetails, setShowDetails] = useState(false);
 
   async function handleShowDetails() {
-    // const ansioso = await getAccomodationDetailById(props.id);
-    // setDetails(ansioso);
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
     props.history.push("/details");
-    // console.log(props.id)
+    console.log(props.id)
   }
+
   return (
     <Card className={classes.root}>
       <CardMedia

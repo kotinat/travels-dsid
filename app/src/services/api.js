@@ -5,8 +5,8 @@ export const getCityIdByName = async (city) => {
     "https://hotels4.p.rapidapi.com/locations/search",
     {
       headers: {
-        "x-rapidapi-host": process.env.x_rapidapi_host,
-        "x-rapidapi-key": process.env.x_rapidapi_key,
+        "x-rapidapi-host": process.env.REACT_APP_x_rapidapi_host,
+        "x-rapidapi-key": process.env.REACT_APP_x_rapidapi_key,
       },
       params: {
         locale: "pt_BR",
@@ -15,23 +15,25 @@ export const getCityIdByName = async (city) => {
     }
   );
 
+  console.log(result);
+
   return result.data.suggestions[0].entities[0].destinationId;
 };
 
 export const getAccomodationsById = async (cityId) => {
   const result = await axios("https://hotels4.p.rapidapi.com/properties/list", {
     headers: {
-      "x-rapidapi-host": process.env.x_rapidapi_host,
-      "x-rapidapi-key": process.env.x_rapidapi_key,
+      "x-rapidapi-host": process.env.REACT_APP_x_rapidapi_host,
+      "x-rapidapi-key": process.env.REACT_APP_x_rapidapi_key,
     },
     params: {
       locale: "pt_BR",
       destinationId: cityId,
       pageNumber: 1,
       // aqui vem o entryDate
-      checkIn: "2020-07-27",
+      checkIn: "2020-08-27",
       // aqui vem o departureDate
-      checkOut: "2020-07-30",
+      checkOut: "2020-08-30",
       pageSize: 5,
       adults1: 2,
     },
@@ -50,25 +52,25 @@ export const getAccomodationsById = async (cityId) => {
     })
   );
 
-  // console.log(parsedResult);
+  console.log(parsedResult);
 
   return parsedResult;
 };
 
 export const getAccomodationDetailById = async (id) => {
   const result = await axios(
-    "//hotels4.p.rapidapi.com/properties/get-details",
+    "https://hotels4.p.rapidapi.com/properties/get-details",
     {
       headers: {
-        "x-rapidapi-host": process.env.x_rapidapi_host,
-        "x-rapidapi-key": process.env.x_rapidapi_key,
+        "x-rapidapi-host": process.env.REACT_APP_x_rapidapi_host,
+        "x-rapidapi-key": process.env.REACT_APP_x_rapidapi_key,
       },
       params: {
         locale: "pt_BR",
         id: id,
-        checkIn: "2020-06-25",
-        checkOut: "2020-06-27",
-        adults1: 2,
+        checkIn: "2020-08-27",
+        checkOut: "2020-08-30",
+        // adults1: 2,
       },
     }
   );
@@ -91,6 +93,6 @@ export const getAccomodationDetailById = async (id) => {
       longitude,
     },
   };
-  // console.log(hospedagem)
+  console.log(hospedagem);
   return hospedagem;
 };
