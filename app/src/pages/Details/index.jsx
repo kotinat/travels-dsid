@@ -87,7 +87,7 @@ const Details = (props) => {
         <Typography variant="h5">
           {`Total da estadia, ${details.price.final}`}
         </Typography>
-        <Button onClick={handlePickAccomodation} color="secondary">
+        <Button onClick={handlePickAccomodation} variant="contained" color="secondary">
           Choose me!
         </Button>
       </Paper>

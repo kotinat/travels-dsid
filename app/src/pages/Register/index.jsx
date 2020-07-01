@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import {
+  Button,
   TextField,
   Grid,
   InputLabel,
@@ -12,11 +13,15 @@ import {
 import "./register.css";
 
 const Register = () => {
-  const [age, setAge] = React.useState("");
+  const [gender, setGender] = React.useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setGender(event.target.value);
   };
+
+  // const handleSubmit = (event) =>{
+  //   props.history.push("/payment");
+  // }
 
   return (
     <div>
@@ -58,7 +63,7 @@ const Register = () => {
             <Select
               labelId="gender"
               id="gender"
-              value={age}
+              value={gender}
               onChange={handleChange}
             >
               <MenuItem value="Masculino">Masculino</MenuItem>
@@ -104,6 +109,9 @@ const Register = () => {
             <TextField type="password" name="password2" id="password2" />
           </div>
         </Grid>
+        <Button href="/payment" variant="contained" color="secondary">
+          Enviar
+        </Button>
       </Grid>
       {/* </FormControl> */}
     </div>

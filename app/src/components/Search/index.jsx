@@ -91,7 +91,7 @@ const Search = (props) => {
           <Button
             className={classes.font}
             variant="contained"
-            color="primary"
+            color="secondary"
             type="submit"
             onClick={handleSubmit}
           >
