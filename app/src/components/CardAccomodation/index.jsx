@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 // import { Link } from "react-router-dom";
 
 // import Details from "../../pages/Details";
-// import { getAccomodationDetailById } from "../../services/api";
+import { getAccomodationDetailById } from "../../services/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +48,7 @@ function getStars(starNumber) {
 const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
+  // const [details, setDetails] = useState();
   const [showDetails, setShowDetails] = useState(false);
 
   async function handleShowDetails() {
@@ -56,8 +57,10 @@ const CardAccomodation = (props) => {
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
     props.history.push("/details");
-    // console.log(props.id)
+    console.log(props.id)
+    // console.log(details)
   }
+
   return (
     <Card className={classes.root}>
       <CardMedia
