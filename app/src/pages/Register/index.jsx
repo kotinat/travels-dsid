@@ -19,9 +19,9 @@ const Register = () => {
     setGender(event.target.value);
   };
 
-  // const handleSubmit = (event) =>{
-  //   props.history.push("/payment");
-  // }
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
 
   return (
     <div>
@@ -109,7 +109,7 @@ const Register = () => {
             <TextField type="password" name="password2" id="password2" />
           </div>
         </Grid>
-        <Button href="/payment" variant="contained" color="secondary">
+        <Button onclick={handleSubmit} href="/payment" variant="contained" color="secondary">
           Enviar
         </Button>
       </Grid>

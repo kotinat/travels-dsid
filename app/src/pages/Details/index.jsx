@@ -8,6 +8,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api";
+
 const details = {
   name: "Milano Hotel",
   rating: 2.5,
@@ -43,8 +44,7 @@ function getStars(starNumber) {
 
 const Details = (props) => {
   const position = [details.location.latitude, details.location.longitude];
-  const [showDetails, setShowDetails] = useState(false);
-  const [fake, setFake] = useState({ name: "Koti", idade: 24 });
+  // const [showDetails, setShowDetails] = useState(false);
   // const [details, setDetails] = useState();
 
   // async function handleSearchAccomodation(){
@@ -52,11 +52,12 @@ const Details = (props) => {
   //   setDetails(ansioso);
   // }
 
-  async function handlePickAccomodation() {
+  async function handlePickAccomodation(e) {
+    e.preventDefault();
     // setShowDetails(!showDetails);
     props.setAccomodation(details);
     console.log(props)
-    // props.history.push("/register");
+    props.history.push("/register");
   }
 
   return (
