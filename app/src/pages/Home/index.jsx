@@ -72,8 +72,6 @@ const Home = (props) => {
   const [data, setData] = useState([]);
   const [showList, setShowList] = useState(false);
 
-  // const accomodationId = props.accomodationId;
-
   async function handleSearch(obj) {
     // const cityId = await getCityIdByName(obj.city);
     // const accomodationsList = await getAccomodationsById(cityId);
@@ -81,11 +79,18 @@ const Home = (props) => {
     setShowList(true);
   }
 
+  // console.log(props)
+
   return (
     <div className="page-home">
       <Header />
       <Search onSearch={handleSearch} />
-      {showList && <AccomodationsList data={data} setAccomodationId={props.setAccomodationId}/>}
+      {showList && (
+        <AccomodationsList
+          data={data}
+          setAccomodationId={props.setAccomodationId}
+        />
+      )}
       <Link to="/details">Go to details</Link>
     </div>
   );

@@ -49,17 +49,15 @@ const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
   const [showDetails, setShowDetails] = useState(false);
-  const [details, setDetails] = useState();
-  const [selectedAccomodation, setSelectedAccomodation] = useState([]);
 
   async function handleShowDetails() {
     // const ansioso = await getAccomodationDetailById(props.id);
     // setDetails(ansioso);
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
-    props.history.push('/details');
+    props.history.push("/details");
+    // console.log(props.id)
   }
-
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -78,15 +76,9 @@ const CardAccomodation = (props) => {
           </Typography>
           <Typography>{`R$${props.price}/noite`}</Typography>
 
-          <Button
-            onClick={handleShowDetails}
-            color="secondary"
-            // href='/details'
-          >
+          <Button onClick={handleShowDetails} color="secondary">
             Detalhes
           </Button>
-
-          {/* {showDetails && <Details/>} */}
         </CardContent>
       </div>
     </Card>

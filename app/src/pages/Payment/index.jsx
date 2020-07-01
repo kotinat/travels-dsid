@@ -1,8 +1,9 @@
 import React from "react";
-
+import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 
-const Payment = () => {
+const Payment = (props) => {
+  console.log(props)
   return (
     <div>
       <header>
@@ -20,4 +21,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default withRouter(Payment);

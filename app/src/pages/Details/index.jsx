@@ -1,8 +1,7 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
+import { Button, Paper, Typography } from "@material-ui/core";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
@@ -44,7 +43,22 @@ function getStars(starNumber) {
 
 const Details = (props) => {
   const position = [details.location.latitude, details.location.longitude];
-  console.log(props);
+  const [showDetails, setShowDetails] = useState(false);
+  const [fake, setFake] = useState({ name: "Koti", idade: 24 });
+  // const [details, setDetails] = useState();
+
+  // async function handleSearchAccomodation(){
+  //   const ansioso = await getAccomodationDetailById(props.accomodationId);
+  //   setDetails(ansioso);
+  // }
+
+  async function handlePickAccomodation() {
+    // setShowDetails(!showDetails);
+    props.setAccomodation(details);
+    console.log(props)
+    // props.history.push("/register");
+  }
+
   return (
     <div>
       <header>
@@ -73,6 +87,9 @@ const Details = (props) => {
         <Typography variant="h5">
           {`Total da estadia, ${details.price.final}`}
         </Typography>
+        <Button onClick={handlePickAccomodation} color="secondary">
+          Choose me!
+        </Button>
       </Paper>
 
       <div className="leaflet-container">
@@ -91,4 +108,4 @@ const Details = (props) => {
   );
 };
 
-export default Details;
+export default withRouter(Details);
