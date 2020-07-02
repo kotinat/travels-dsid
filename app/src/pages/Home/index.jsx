@@ -71,16 +71,26 @@ const Home = (props) => {
   const [data, setData] = useState([]);
   const [showList, setShowList] = useState(false);
 
+  function finalPrice(days, perNight) {
+    return days * perNight;
+  }
+
   async function handleSearch(obj) {
     // const cityId = await getCityIdByName(obj.city)
-    const { entryDate, departureDate, unformattedEntryDate, unformattedDepartureDate } = await obj;
-    testing(unformattedEntryDate, unformattedDepartureDate);
+    const {
+      entryDate,
+      departureDate,
+      unformattedEntryDate,
+      unformattedDepartureDate,
+    } = await obj;
+    // props.setCountOfDays(testing(unformattedEntryDate, unformattedDepartureDate));
+    const count = testing(unformattedEntryDate, unformattedDepartureDate);
+    props.setCountOfDays(count);
     // const accomodationsList = await getAccomodationsById(cityId, entryDate, departureDate);
+    props.setPrice(finalPrice(props.countOfDays, props.price.perNight));
     setData(listaHospedagens); // accomodationsList
     setShowList(true);
   }
-
-  console.log(props);
 
   return (
     <div className="page-home">
@@ -90,6 +100,8 @@ const Home = (props) => {
         <AccomodationsList
           data={data}
           setAccomodationId={props.setAccomodationId}
+          setPrice={props.setPrice}
+          total={props.total}
         />
       )}
     </div>

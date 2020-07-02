@@ -55,13 +55,6 @@ const Register = (props) => {
     email: "",
     password: "",
   });
-  // state dos dados do pedido
-  // const [orderData, setOrderData] = useState({
-  //   accId: "",
-  //   pricePerNight: 0,
-  //   priceTotal: 0,
-  //   userId: "",
-  // });
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -119,21 +112,17 @@ const Register = (props) => {
       password,
     };
 
-    const iha = await register.post("register", JSON.stringify(data));
-    console.log(iha);
-
-    const order = {
-      accId: props.accomodationId,
-      pricePerNight: props.accomodation.price.perNight,
-      priceTotal: props.accomodation.price.final,
-      userId: iha.data.user._id,
-    };
+    await register.post("register", JSON.stringify(data));
+    // const newUser =
+    // const order = {
+    //   accId: props.accomodationId,
+    //   pricePerNight: props.price,
+    //   priceTotal: props.total(),
+    //   userId: newUser.data.user._id,
+    // };
     // AGORA SÓ FALTA FAZER O POST DA API!!
-    console.log(order);
     handleOpen();
   }
-
-  // console.log(props);
 
   return (
     <div>

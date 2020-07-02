@@ -17,7 +17,7 @@ export const testing = (date1, date2) => {
 
   var parsedDiffInDays = Math.ceil(diffInDays); // integer
 
-  console.log(parsedDiffInDays);
+  // console.log(parsedDiffInDays);
 
   return parsedDiffInDays;
 };

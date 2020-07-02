@@ -10,7 +10,6 @@ const register = {
 };
 
 const Payment = (props) => {
-  console.log(props);
   return (
     <div>
       <header>

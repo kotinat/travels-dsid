@@ -42,10 +42,6 @@ const Details = (props) => {
     details.location.latitude,
     details.location.longitude,
   ];
-  const [price, setPrice] = useState({
-    perNight: 0,
-    total: 0,
-  });
 
   // Chamada na API, comentado para deixar mockado
   // async function handleSearchAccomodation(id) {
@@ -57,8 +53,7 @@ const Details = (props) => {
   // Faz a chamada assim que o componente Details é renderizado
   useEffect(() => {
     //   handleSearchAccomodation(props.accomodationId);
-    props.setPrice(details.price);
-    console.log(props.price);
+    props.setPrice(props.price);
   }, []);
 
   async function handlePickAccomodation(e) {
@@ -66,8 +61,6 @@ const Details = (props) => {
     props.setAccomodation(details);
     props.history.push("/register");
   }
-
-  console.log(props);
 
   return (
     <div>
@@ -93,11 +86,9 @@ const Details = (props) => {
                 <Typography key={id}>{comodidade}</Typography>
               ))}
             </Typography>
-            <Typography variant="h6">
-              {`${details.price.perNight}/noite`}
-            </Typography>
+            <Typography variant="h6">{`${props.price}/noite`}</Typography>
             <Typography variant="h5">
-              {`Total da estadia, ${details.price.final}`}
+              {`Total da estadia, ${props.total()}`}
             </Typography>
             <Button
               onClick={handlePickAccomodation}

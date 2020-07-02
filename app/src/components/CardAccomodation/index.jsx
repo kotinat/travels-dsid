@@ -39,12 +39,13 @@ const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
   const [showDetails, setShowDetails] = useState(false);
+  const convertedPrice = Math.ceil(props.price);
 
   async function handleShowDetails() {
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
+    props.setPrice(convertedPrice);
     props.history.push("/details");
-    console.log(props.id)
   }
 
   return (
@@ -63,7 +64,7 @@ const CardAccomodation = (props) => {
           <Typography variant="subtitle1" color="textSecondary">
             {getStars(props.stars)}
           </Typography>
-          <Typography>{`R$${props.price}/noite`}</Typography>
+          <Typography>{`R$${convertedPrice}/noite`}</Typography>
 
           <Button onClick={handleShowDetails} color="secondary">
             Detalhes
