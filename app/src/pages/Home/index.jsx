@@ -71,8 +71,9 @@ const Home = (props) => {
   const [showList, setShowList] = useState(false);
 
   async function handleSearch(obj) {
-    // const cityId = await getCityIdByName(obj.city);
-    // const accomodationsList = await getAccomodationsById(cityId);
+    // const cityId = await getCityIdByName(obj.city)
+    // const {entryDate, departureDate} = await obj;
+    // const accomodationsList = await getAccomodationsById(cityId, entryDate, departureDate);
     setData(listaHospedagens); // accomodationsList
     setShowList(true);
   }

@@ -15,12 +15,12 @@ export const getCityIdByName = async (city) => {
     }
   );
 
-  console.log(result);
+  // console.log(result);
 
   return result.data.suggestions[0].entities[0].destinationId;
 };
 
-export const getAccomodationsById = async (cityId) => {
+export const getAccomodationsById = async (cityId, entryDate, departureDate) => {
   const result = await axios("https://hotels4.p.rapidapi.com/properties/list", {
     headers: {
       "x-rapidapi-host": process.env.REACT_APP_x_rapidapi_host,
@@ -30,10 +30,8 @@ export const getAccomodationsById = async (cityId) => {
       locale: "pt_BR",
       destinationId: cityId,
       pageNumber: 1,
-      // aqui vem o entryDate
-      checkIn: "2020-08-27",
-      // aqui vem o departureDate
-      checkOut: "2020-08-30",
+      checkIn: entryDate,
+      checkOut: departureDate,
       pageSize: 5,
       adults1: 2,
       currency: "BRL"
@@ -53,7 +51,7 @@ export const getAccomodationsById = async (cityId) => {
     })
   );
 
-  console.log(parsedResult);
+  // console.log(parsedResult);
 
   return parsedResult;
 };
@@ -69,8 +67,8 @@ export const getAccomodationDetailById = async (id) => {
       params: {
         locale: "pt_BR",
         id: id,
-        checkIn: "2020-08-27",
-        checkOut: "2020-08-30",
+        // checkIn: "2020-08-27",
+        // checkOut: "2020-08-30",
         // adults1: 2,
       },
     }
@@ -94,6 +92,6 @@ export const getAccomodationDetailById = async (id) => {
       longitude,
     },
   };
-  console.log(hospedagem);
+  // console.log(hospedagem);
   return hospedagem;
 };

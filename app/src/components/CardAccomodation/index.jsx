@@ -7,8 +7,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-// import { getAccomodationDetailById } from "../../services/api";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -46,7 +44,6 @@ function getStars(starNumber) {
 const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
-  // const [details, setDetails] = useState();
   const [showDetails, setShowDetails] = useState(false);
 
   async function handleShowDetails() {
