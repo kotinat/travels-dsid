@@ -28,6 +28,8 @@ const Search = (props) => {
     props.onSearch({
       city: city,
       entryDate: transformDate(entryDate),
+      unformattedEntryDate: entryDate,
+      unformattedDepartureDate: departureDate,
       departureDate: transformDate(departureDate),
       guest: guest,
     });

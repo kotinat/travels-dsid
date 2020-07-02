@@ -7,6 +7,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import { getStars } from "../../controllers/starRating";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -32,14 +34,6 @@ const useStyles = makeStyles((theme) => ({
     width: 38,
   },
 }));
-
-function getStars(starNumber) {
-  var result = "";
-  for (var i = 0; i < starNumber; i++) {
-    result = result.concat("✮");
-  }
-  return result;
-}
 
 const CardAccomodation = (props) => {
   const classes = useStyles();

@@ -5,6 +5,7 @@ import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
 
 // import { getCityIdByName, getAccomodationsById } from "../../services/api";
+import { testing } from "../../controllers/dateAccomodation";
 
 import "./home.css";
 
@@ -72,7 +73,8 @@ const Home = (props) => {
 
   async function handleSearch(obj) {
     // const cityId = await getCityIdByName(obj.city)
-    // const {entryDate, departureDate} = await obj;
+    const { entryDate, departureDate, unformattedEntryDate, unformattedDepartureDate } = await obj;
+    testing(unformattedEntryDate, unformattedDepartureDate);
     // const accomodationsList = await getAccomodationsById(cityId, entryDate, departureDate);
     setData(listaHospedagens); // accomodationsList
     setShowList(true);

@@ -9,6 +9,7 @@ import Payment from "./pages/Payment";
 const Routes = () => {
   const [accomodationId, setAccomodationId] = useState(null);
   const [accomodation, setAccomodation] = useState({});
+  const [price, setPrice] = useState({ perNight: 0, total: 0 });
   // const [accomodationName, setccomodationName] = useState("Hotel teste");
   // const [pricePerNight, setPricePerNight] = useState("70");
   // const [stay, setStay] = useState("5");
@@ -27,6 +28,8 @@ const Routes = () => {
             accomodationId={accomodationId}
             accomodation={accomodation}
             setAccomodation={setAccomodation}
+            price={price}
+            setPrice={setPrice}
           />
         )}
         path="/details"

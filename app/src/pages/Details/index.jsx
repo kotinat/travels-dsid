@@ -8,6 +8,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api";
+import { getStars } from "../../controllers/starRating";
 
 const details = {
   name: "Milano Hotel",
@@ -34,14 +35,6 @@ const details = {
   },
 };
 
-function getStars(starNumber) {
-  var result = "";
-  for (var i = 0; i < starNumber; i++) {
-    result = result.concat("✮");
-  }
-  return result;
-}
-
 const Details = (props) => {
   const [showDetails, setShowDetails] = useState(true); // false
   // const [details, setDetails] = useState();
@@ -49,6 +42,10 @@ const Details = (props) => {
     details.location.latitude,
     details.location.longitude,
   ];
+  const [price, setPrice] = useState({
+    perNight: 0,
+    total: 0,
+  });
 
   // Chamada na API, comentado para deixar mockado
   // async function handleSearchAccomodation(id) {
@@ -58,9 +55,11 @@ const Details = (props) => {
   // }
 
   // Faz a chamada assim que o componente Details é renderizado
-  // useEffect(() => {
-  //   handleSearchAccomodation(props.accomodationId);
-  // }, []);
+  useEffect(() => {
+    //   handleSearchAccomodation(props.accomodationId);
+    props.setPrice(details.price);
+    console.log(props.price);
+  }, []);
 
   async function handlePickAccomodation(e) {
     e.preventDefault();

@@ -1,6 +1,6 @@
 const dateformat = require("dateformat");
 
-export const transformDate = (date) => { // async
+export const transformDate = (date) => {
   try {
     date = dateformat(date, "yyyy-mm-dd");
     // console.log(date);
@@ -10,23 +10,14 @@ export const transformDate = (date) => { // async
   }
 };
 
-// export const testing = async () => {
-//   var date1 = new Date("01/05/2020");
+export const testing = (date1, date2) => {
+  var diffInTime = date2.getTime() - date1.getTime();
 
-//   var date2 = new Date("01/20/2020");
+  var diffInDays = diffInTime / (1000 * 3600 * 24);
 
-//   var diffInTime = date2.getTime() - date1.getTime();
+  var parsedDiffInDays = Math.ceil(diffInDays); // integer
 
-//   var diffInDays = diffInTime / (1000 * 3600 * 24);
+  console.log(parsedDiffInDays);
 
-//   console.log(diffInDays);
-
-//   return diffInDays;
-// };
-
-// async function test() {
-//   var wtf = await testing();
-
-//   console.log(wtf);
-// }
-// test();
+  return parsedDiffInDays;
+};
