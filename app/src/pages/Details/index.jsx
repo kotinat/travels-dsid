@@ -68,7 +68,7 @@ const Details = (props) => {
     props.history.push("/register");
   }
 
-  // console.log(props);
+  console.log(props);
 
   return (
     <div>

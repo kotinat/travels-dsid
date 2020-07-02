@@ -3,7 +3,7 @@ const dateformat = require("dateformat");
 export const transformDate = (date) => { // async
   try {
     date = dateformat(date, "yyyy-mm-dd");
-    console.log(date);
+    // console.log(date);
     return date;
   } catch (err) {
     console.log(err);

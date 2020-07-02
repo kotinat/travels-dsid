@@ -25,12 +25,21 @@ const Routes = () => {
         render={() => (
           <Details
             accomodationId={accomodationId}
+            accomodation={accomodation}
             setAccomodation={setAccomodation}
           />
         )}
         path="/details"
       />
-      <Route component={Register} path="/register" />
+      <Route
+        render={() => (
+          <Register
+            accomodation={accomodation}
+            accomodationId={accomodationId}
+          />
+        )}
+        path="/register"
+      />
       <Route
         render={() => (
           <Payment

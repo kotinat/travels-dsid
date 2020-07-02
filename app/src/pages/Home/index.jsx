@@ -78,6 +78,8 @@ const Home = (props) => {
     setShowList(true);
   }
 
+  console.log(props);
+
   return (
     <div className="page-home">
       <Header />

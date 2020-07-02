@@ -8,6 +8,7 @@ const register = {
   pedido: 981273982173,
   valor: 355,
 };
+
 const Payment = (props) => {
   console.log(props);
   return (
