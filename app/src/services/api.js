@@ -36,6 +36,7 @@ export const getAccomodationsById = async (cityId) => {
       checkOut: "2020-08-30",
       pageSize: 5,
       adults1: 2,
+      currency: "BRL"
     },
   });
 
