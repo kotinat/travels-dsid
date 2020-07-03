@@ -3,7 +3,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
-
 // import { getCityIdByName, getAccomodationsById } from "../../services/api";
 import { testing } from "../../controllers/dateAccomodation";
 
@@ -106,7 +105,12 @@ const Home = (props) => {
   return (
     <div className="page-home">
       <Header />
+      {/* <Parallax image={require("../../assets/img/mountain-landscape.jpg")}>
+      
+      </Parallax> */}
       <Search onSearch={handleSearch} />
+
+
       {loading && <CircularProgress color="secondary" />}
       {showList && (
         <AccomodationsList

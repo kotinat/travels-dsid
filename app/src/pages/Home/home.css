@@ -1,3 +1,10 @@
+.container-search {
+  margin: 0;
+  padding: 0;
+  background: url("../../assets/img/mountain-landscape.jpg");
+  background-size: cover;
+  background-position: center center;
+}
 
 body {
   background: #f0f0f5;
