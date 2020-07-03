@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicDatePicker from "../BasicDatePicker";
+import { transformDate } from "../../controllers/dateAccomodation";
 
 const useStyles = makeStyles((theme) => ({
   inputs: {
@@ -26,8 +27,10 @@ const Search = (props) => {
   function handleSubmit() {
     props.onSearch({
       city: city,
-      entryDate: entryDate,
-      departureDate: departureDate,
+      entryDate: transformDate(entryDate),
+      unformattedEntryDate: entryDate,
+      unformattedDepartureDate: departureDate,
+      departureDate: transformDate(departureDate),
       guest: guest,
     });
   }
@@ -36,12 +39,12 @@ const Search = (props) => {
     setCity(event.target.value);
   }
 
-  function handleEntryDateChange(event) {
-    setEntryDate(event.target.value);
+  function handleEntryDateChange(date) {
+    setEntryDate(date);
   }
 
-  function handleDepartureDateChange(event) {
-    setDepartureDate(event.target.value);
+  function handleDepartureDateChange(date) {
+    setDepartureDate(date);
   }
 
   function handleGuestChange(event) {

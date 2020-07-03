@@ -7,7 +7,7 @@ import {
 
 const BasicDatePicker = (props) => {
   const handleDateChange = (date) => {
-    props.setSelectedDate(date);
+    props.onChange(date);
   };
 
   return (

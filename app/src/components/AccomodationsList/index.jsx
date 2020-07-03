@@ -1,5 +1,5 @@
 import React from "react";
-import CardAccomodation from '../CardAccomodation';
+import CardAccomodation from "../CardAccomodation";
 
 const AccomodationsList = (props) => {
   return (
@@ -16,6 +16,8 @@ const AccomodationsList = (props) => {
             src={accomodation.image.src}
             alt={accomodation.image.name}
             setAccomodationId={props.setAccomodationId}
+            setPrice={props.setPrice}
+            total={props.total}
           />
         ))}
       </div>

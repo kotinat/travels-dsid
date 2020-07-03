@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   // state do gênero
   const [selectedGender, setselectedGender] = React.useState("");
   // state dos dados do formulário
@@ -55,7 +55,6 @@ const Register = () => {
     email: "",
     password: "",
   });
-
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -113,8 +112,15 @@ const Register = () => {
       password,
     };
 
-    const iha = await register.post("register", JSON.stringify(data));
-    console.log(iha);
+    await register.post("register", JSON.stringify(data));
+    // const newUser =
+    // const order = {
+    //   accId: props.accomodationId,
+    //   pricePerNight: props.price,
+    //   priceTotal: props.total(),
+    //   userId: newUser.data.user._id,
+    // };
+    // AGORA SÓ FALTA FAZER O POST DA API!!
     handleOpen();
   }
 

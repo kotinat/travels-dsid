@@ -9,15 +9,23 @@ import Payment from "./pages/Payment";
 const Routes = () => {
   const [accomodationId, setAccomodationId] = useState(null);
   const [accomodation, setAccomodation] = useState({});
-  // const [accomodationName, setccomodationName] = useState("Hotel teste");
-  // const [pricePerNight, setPricePerNight] = useState("70");
-  // const [stay, setStay] = useState("5");
-  // const [accomodationPhoto, setAccomodationPhoto] = useState("brebles");
+  const [price, setPrice] = useState(0);
+  const [countOfDays, setCountOfDays] = useState(0);
+  const total = () => price * countOfDays;
 
   return (
     <BrowserRouter>
       <Route
-        render={() => <Home setAccomodationId={setAccomodationId} />}
+        render={() => (
+          <Home
+            setAccomodationId={setAccomodationId}
+            price={price}
+            setPrice={setPrice}
+            setCountOfDays={setCountOfDays}
+            countOfDays={countOfDays}
+            total={total}
+          />
+        )}
         path="/"
         exact
       />
@@ -25,12 +33,26 @@ const Routes = () => {
         render={() => (
           <Details
             accomodationId={accomodationId}
+            accomodation={accomodation}
             setAccomodation={setAccomodation}
+            price={price}
+            setPrice={setPrice}
+            total={total}
           />
         )}
         path="/details"
       />
-      <Route component={Register} path="/register" />
+      <Route
+        render={() => (
+          <Register
+            accomodation={accomodation}
+            accomodationId={accomodationId}
+            total={total}
+            price={price}
+          />
+        )}
+        path="/register"
+      />
       <Route
         render={() => (
           <Payment

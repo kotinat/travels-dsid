@@ -8,6 +8,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api";
+import { getStars } from "../../controllers/starRating";
 
 const details = {
   name: "Milano Hotel",
@@ -34,14 +35,6 @@ const details = {
   },
 };
 
-function getStars(starNumber) {
-  var result = "";
-  for (var i = 0; i < starNumber; i++) {
-    result = result.concat("✮");
-  }
-  return result;
-}
-
 const Details = (props) => {
   const [showDetails, setShowDetails] = useState(true); // false
   // const [details, setDetails] = useState();
@@ -58,17 +51,16 @@ const Details = (props) => {
   // }
 
   // Faz a chamada assim que o componente Details é renderizado
-  // useEffect(() => {
-  //   handleSearchAccomodation(props.accomodationId);
-  // }, []);
+  useEffect(() => {
+    //   handleSearchAccomodation(props.accomodationId);
+    props.setPrice(props.price);
+  }, []);
 
   async function handlePickAccomodation(e) {
     e.preventDefault();
     props.setAccomodation(details);
     props.history.push("/register");
   }
-
-  console.log(props);
 
   return (
     <div>
@@ -94,11 +86,9 @@ const Details = (props) => {
                 <Typography key={id}>{comodidade}</Typography>
               ))}
             </Typography>
-            <Typography variant="h6">
-              {`${details.price.perNight}/noite`}
-            </Typography>
+            <Typography variant="h6">{`${props.price}/noite`}</Typography>
             <Typography variant="h5">
-              {`Total da estadia, ${details.price.final}`}
+              {`Total da estadia, ${props.total()}`}
             </Typography>
             <Button
               onClick={handlePickAccomodation}

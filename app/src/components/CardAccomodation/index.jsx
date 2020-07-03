@@ -7,7 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-// import { getAccomodationDetailById } from "../../services/api";
+import { getStars } from "../../controllers/starRating";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,25 +35,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getStars(starNumber) {
-  var result = "";
-  for (var i = 0; i < starNumber; i++) {
-    result = result.concat("✮");
-  }
-  return result;
-}
-
 const CardAccomodation = (props) => {
   const classes = useStyles();
   // const theme = useTheme();
-  // const [details, setDetails] = useState();
   const [showDetails, setShowDetails] = useState(false);
+  const convertedPrice = Math.ceil(props.price);
 
   async function handleShowDetails() {
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
+    props.setPrice(convertedPrice);
     props.history.push("/details");
-    console.log(props.id)
   }
 
   return (
@@ -72,7 +64,7 @@ const CardAccomodation = (props) => {
           <Typography variant="subtitle1" color="textSecondary">
             {getStars(props.stars)}
           </Typography>
-          <Typography>{`R$${props.price}/noite`}</Typography>
+          <Typography>{`R$${convertedPrice}/noite`}</Typography>
 
           <Button onClick={handleShowDetails} color="secondary">
             Detalhes
