@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     height: 38,
     width: 38,
   },
+  font: "ubuntu",
 }));
 
 const CardAccomodation = (props) => {
@@ -66,7 +67,12 @@ const CardAccomodation = (props) => {
           </Typography>
           <Typography>{`R$${convertedPrice}/noite`}</Typography>
 
-          <Button onClick={handleShowDetails} color="secondary">
+          <Button
+            className={classes.font}
+            onClick={handleShowDetails}
+            variant="contained"
+            color="secondary"
+          >
             Detalhes
           </Button>
         </CardContent>

@@ -12,6 +12,7 @@ const Routes = () => {
   const [price, setPrice] = useState(0);
   const [countOfDays, setCountOfDays] = useState(0);
   const total = () => price * countOfDays;
+  const [order, setOrder] = useState({})
 
   return (
     <BrowserRouter>
@@ -49,6 +50,7 @@ const Routes = () => {
             accomodationId={accomodationId}
             total={total}
             price={price}
+            setOrder={setOrder}
           />
         )}
         path="/register"
@@ -58,6 +60,7 @@ const Routes = () => {
           <Payment
             accomodation={accomodation}
             accomodationId={accomodationId}
+            order={order}
           />
         )}
         path="/payment"

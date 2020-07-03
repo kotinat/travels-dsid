@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import register from "../../services/register";
+import apiorder from "../../services/apiorder";
 
 import "./register.css";
 
@@ -112,15 +113,20 @@ const Register = (props) => {
       password,
     };
 
-    await register.post("register", JSON.stringify(data));
-    // const newUser =
-    // const order = {
-    //   accId: props.accomodationId,
-    //   pricePerNight: props.price,
-    //   priceTotal: props.total(),
-    //   userId: newUser.data.user._id,
-    // };
-    // AGORA SÓ FALTA FAZER O POST DA API!!
+    const newUser = await register.post("register", JSON.stringify(data));
+
+    const order = {
+      name: name,
+      accommodationId: props.accomodationId,
+      pricePerNight: props.price,
+      priceTotal: props.total(),
+      userId: newUser.data.user._id,
+    };
+
+    const newOrder = await apiorder.post("orders", JSON.stringify(order));
+
+    props.setOrder(newOrder);
+
     handleOpen();
   }
 

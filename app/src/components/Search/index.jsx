@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  font: {
-    fontFamily: "ubuntu",
-  },
 }));
 
 const Search = (props) => {
@@ -88,7 +85,6 @@ const Search = (props) => {
         </Grid>
         <Grid item xs={12}>
           <Button
-            className={classes.font}
             variant="contained"
             color="secondary"
             type="submit"

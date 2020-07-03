@@ -18,7 +18,7 @@ h4,
 h5,
 h6 {
   color: var(--title-color);
-  font-family: Ubuntu;
+  font-family: Roboto;
 }
 
 /* .page-home {
