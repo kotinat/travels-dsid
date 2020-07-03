@@ -16,10 +16,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = (props) => {
   const classes = useStyles();
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState(null);
   const [entryDate, setEntryDate] = useState(new Date());
   const [departureDate, setDepartureDate] = useState(new Date());
-  const [guest, setGuest] = useState("0");
+  const [guest, setGuest] = useState(null);
+  const [blankField, setBlankField] = useState(false);
 
   function handleSubmit() {
     props.onSearch({
@@ -30,6 +31,7 @@ const Search = (props) => {
       departureDate: transformDate(departureDate),
       guest: guest,
     });
+    if (!city || entryDate == departureDate) alert("Preencha todos os campos!");
   }
 
   function handleCityChange(event) {
@@ -55,6 +57,9 @@ const Search = (props) => {
           <TextField
             placeholder="Digite aqui o seu próximo destino"
             onChange={handleCityChange}
+            autoFocus
+            // label="Obrigatório*"
+            // error={blankField}
           />
         </Grid>
         <Grid item xs={3}>
@@ -81,6 +86,7 @@ const Search = (props) => {
             placeholder="Selecione a quantidade de pessoas"
             type="number"
             onChange={handleGuestChange}
+            defaultValue={2}
           />
         </Grid>
         <Grid item xs={12}>
