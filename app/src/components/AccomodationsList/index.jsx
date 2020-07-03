@@ -1,9 +1,10 @@
 import React from "react";
 import CardAccomodation from "../CardAccomodation";
+import Container from "@material-ui/core/Container";
 
 const AccomodationsList = (props) => {
   return (
-    <div>
+    <Container maxWidth="md">
       <h1>{`Resultados da busca`}</h1>
       <div>
         {props.data.map((accomodation, id) => (
@@ -21,7 +22,7 @@ const AccomodationsList = (props) => {
           />
         ))}
       </div>
-    </div>
+    </Container>
   );
 };
 

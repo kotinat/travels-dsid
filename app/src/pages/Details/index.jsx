@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Paper, Typography } from "@material-ui/core";
+import { Button, Paper, Typography, CircularProgress } from "@material-ui/core";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
@@ -38,6 +38,7 @@ import { getStars } from "../../controllers/starRating";
 const Details = (props) => {
   const [showDetails, setShowDetails] = useState(false); // false
   const [details, setDetails] = useState(); // comentar
+  const [loading, setLoading] = useState(false);
   const position = () => [
     details.location.latitude,
     details.location.longitude,
@@ -49,10 +50,12 @@ const Details = (props) => {
     const ansioso = await getAccomodationDetailById(id);
     setDetails(ansioso);
     setShowDetails(true);
+    setLoading(false);
   }
 
   // Faz a chamada assim que o componente Details é renderizado
   useEffect(() => {
+    setLoading(true);
     handleSearchAccomodation(props.accomodationId); // comentar
     props.setPrice(props.price);
   }, []);
@@ -76,6 +79,7 @@ const Details = (props) => {
       </header>
 
       <h1>Detalhes</h1>
+      {loading && <CircularProgress color="secondary" />}
       {showDetails && (
         <div>
           <Paper>

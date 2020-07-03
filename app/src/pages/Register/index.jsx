@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
   Modal,
+  CircularProgress,
 } from "@material-ui/core";
 import axios from "axios";
 import register from "../../services/register";
@@ -56,6 +57,7 @@ const Register = (props) => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -99,7 +101,7 @@ const Register = (props) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    setLoading(true);
     const gender = selectedGender;
     const { name, surname, birthdate, phoneNumber, email, password } = formData;
 
@@ -126,7 +128,7 @@ const Register = (props) => {
     const newOrder = await apiorder.post("orders", JSON.stringify(order));
 
     props.setOrder(newOrder);
-
+    setLoading(false);
     handleOpen();
   }
 
@@ -245,6 +247,7 @@ const Register = (props) => {
         >
           Enviar
         </Button>
+        {loading && <CircularProgress color="secondary" />}
         <Modal
           open={open}
           onClose={handleClose}
