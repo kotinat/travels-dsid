@@ -13,14 +13,34 @@ export const getCityIdByName = async (city) => {
         query: city,
       },
     }
-  );
-
-  // console.log(result);
-
-  return result.data.suggestions[0].entities[0].destinationId;
+  )
+    .then((result) => {
+      if (
+        result.data.suggestions[0].entities[0] === [] ||
+        result.data.suggestions[0].entities[0] === "" ||
+        result.data.suggestions[0].entities[0] === undefined ||
+        !result.data.suggestions[0].entities[0]
+      ) {
+        return Promise.reject();
+      }
+      console.log(result);
+      return result.data.suggestions[0].entities[0].destinationId;
+    })
+    .catch((error) => {
+      console.log(error);
+      return;
+    });
 };
 
-export const getAccomodationsById = async (cityId, entryDate, departureDate) => {
+export const getAccomodationsById = async (
+  cityId,
+  entryDate,
+  departureDate
+) => {
+  if (!cityId || cityId === null || cityId === "" || cityId === undefined) {
+    alert("Não foi possível encontrar a cidade");
+    return Promise.reject();
+  }
   const result = await axios("https://hotels4.p.rapidapi.com/properties/list", {
     headers: {
       "x-rapidapi-host": process.env.REACT_APP_x_rapidapi_host,
@@ -34,26 +54,32 @@ export const getAccomodationsById = async (cityId, entryDate, departureDate) => 
       checkOut: departureDate,
       pageSize: 5,
       adults1: 2,
-      currency: "BRL"
+      currency: "BRL",
     },
-  });
+  })
+    .then((result) => {
+      console.log(result);
+      const parsedResult = result.data.data.body.searchResults.results.map(
+        (item) => ({
+          id: item.id,
+          name: item.name,
+          image: {
+            src: item.thumbnailUrl,
+            name: item.name,
+          },
+          rating: item.starRating,
+          price: item.ratePlan.price.exactCurrent,
+        })
+      );
 
-  const parsedResult = result.data.data.body.searchResults.results.map(
-    (item) => ({
-      id: item.id,
-      name: item.name,
-      image: {
-        src: item.thumbnailUrl,
-        name: item.name,
-      },
-      rating: item.starRating,
-      price: item.ratePlan.price.exactCurrent,
+      console.log(parsedResult);
+
+      return parsedResult;
     })
-  );
-
-  // console.log(parsedResult);
-
-  return parsedResult;
+    .catch((error) => {
+      console.log(error);
+      return;
+    });
 };
 
 export const getAccomodationDetailById = async (id) => {
@@ -67,9 +93,6 @@ export const getAccomodationDetailById = async (id) => {
       params: {
         locale: "pt_BR",
         id: id,
-        // checkIn: "2020-08-27",
-        // checkOut: "2020-08-30",
-        // adults1: 2,
       },
     }
   );
@@ -92,6 +115,6 @@ export const getAccomodationDetailById = async (id) => {
       longitude,
     },
   };
-  // console.log(hospedagem);
+  console.log(hospedagem);
   return hospedagem;
 };
