@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const register = axios.create({
-  baseURL: process.env.REACT_APP_API_REGISTER,
+  baseURL: "https://backend-dsid.herokuapp.com/auth",
   headers: { "Content-Type": "application/json" },
 });
 
