@@ -131,7 +131,7 @@ const Search = (props) => {
             variant="outlined"
           />
         </Grid>
-        <Grid container xs={12} justify="center">
+        <Grid container justify="center">
           <Button
             variant="contained"
             color="secondary"

@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 
 const AccomodationsList = (props) => {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <h1>{`Resultados da busca`}</h1>
       <div>
         {props.data.map((accomodation, id) => (

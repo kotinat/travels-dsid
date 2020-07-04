@@ -13,7 +13,7 @@ const BasicDatePicker = (props) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
-      inputVariant="outlined"
+        inputVariant="outlined"
         disablePast
         disableToolbar
         variant="inline"

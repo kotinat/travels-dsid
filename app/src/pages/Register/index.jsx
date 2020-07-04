@@ -12,6 +12,12 @@ import {
   Modal,
   CircularProgress,
 } from "@material-ui/core";
+import {
+  DatePicker,
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 import axios from "axios";
 import register from "../../services/register";
 import apiorder from "../../services/apiorder";
@@ -39,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    // border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -47,21 +53,23 @@ const useStyles = makeStyles((theme) => ({
 
 const Register = (props) => {
   // state do gênero
-  const [selectedGender, setselectedGender] = React.useState("");
+  const [selectedGender, setselectedGender] = useState("");
+  const [selectedDate, setselectedDate] = useState(new Date());
   // state dos dados do formulário
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
-    birthdate: "",
     phoneNumber: "",
     email: "",
-    password: "",
   });
   const [loading, setLoading] = useState(false);
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const [nameBlank, setNameBlank] = useState(false);
+  const [surnameBlank, setSurnameBlank] = useState(false);
+  const [emailBlank, setEmailBlank] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -91,19 +99,39 @@ const Register = (props) => {
     setselectedGender(event.target.value);
   };
 
+  // const handleDateChange = (event) => {
+  //   setselectedDate(event.target.value);
+  // };
   // função que captura interação de input, genericamente
   // assim não é preciso fazer um handle para cada campo
   function handleInputChange(event) {
-    event.preventDefault();
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    if (nameBlank === true) setNameBlank(false);
+    if (surnameBlank === true) setSurnameBlank(false);
+    if (emailBlank === true) setEmailBlank(false);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setLoading(true);
     const gender = selectedGender;
-    const { name, surname, birthdate, phoneNumber, email, password } = formData;
+    const birthdate = selectedDate;
+    const { name, surname, phoneNumber, email } = formData;
+    if (name === "" || name === null) {
+      setNameBlank(true);
+      alert("Por favor, preencha os campos obrigatórios marcados com *.");
+      return;
+    }
+    if (surname === "" || surname === null) {
+      setSurnameBlank(true);
+      alert("Por favor, preencha os campos obrigatórios marcados com *.");
+      return;
+    }
+    if (email === "" || email === null) {
+      setEmailBlank(true);
+      alert("Por favor, preencha os campos obrigatórios marcados com *.");
+      return;
+    }
 
     const data = {
       name,
@@ -112,11 +140,11 @@ const Register = (props) => {
       gender,
       phoneNumber,
       email,
-      password,
     };
 
+    setLoading(true);
     const newUser = await register.post("register", JSON.stringify(data));
-
+    setLoading(false);
     const order = {
       name: name,
       accommodationId: props.accomodationId,
@@ -149,45 +177,60 @@ const Register = (props) => {
       <Grid container>
         <Grid item xs={6}>
           <div className="field">
-            <InputLabel htmlFor="name">Nome</InputLabel>
+            <InputLabel htmlFor="name">Nome*</InputLabel>
             <TextField
+              variant="outlined"
               type="text"
               name="name"
               id="name"
               onChange={handleInputChange}
+              error={nameBlank}
+              helperText={nameBlank ? "Campo obrigatório." : ""}
             />
           </div>
         </Grid>
         <Grid item xs={6}>
           <div className="field">
-            <InputLabel htmlFor="surname">Sobrenome</InputLabel>
+            <InputLabel htmlFor="surname">Sobrenome*</InputLabel>
             <TextField
+              variant="outlined"
               type="text"
               name="surname"
               id="surname"
               onChange={handleInputChange}
+              error={surnameBlank}
+              helperText={surnameBlank ? "Campo obrigatório." : ""}
             />
           </div>
         </Grid>
         <Grid item xs={6}>
           <div className="field">
             <InputLabel htmlFor="birthdate">Data de Nascimento</InputLabel>
-            <TextField
-              type="date"
-              name="birthdate"
-              id="birthdate"
-              onChange={handleInputChange}
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                inputVariant="outlined"
+                disableFuture
+                name="birthdate"
+                id="birthdate"
+                openTo="year"
+                format="dd/MM/yyyy"
+                views={["year", "month", "date"]}
+                value={selectedDate}
+                onChange={setselectedDate}
+              />
+            </MuiPickersUtilsProvider>
           </div>
         </Grid>
         <Grid item xs={6}>
           <div className="field">
             <InputLabel htmlFor="gender">Sexo</InputLabel>
             <Select
+              variant="outlined"
               labelId="gender"
               id="gender"
               value={selectedGender}
               onChange={handleGenderChange}
+              defaultValue={"Selecione"}
             >
               <MenuItem value="Masculino">Masculino</MenuItem>
               <MenuItem value="Feminino">Feminino</MenuItem>
@@ -201,6 +244,7 @@ const Register = (props) => {
           <div className="field">
             <InputLabel htmlFor="phoneNumber">Telefone</InputLabel>
             <TextField
+              variant="outlined"
               type="phone"
               name="phoneNumber"
               id="phoneNumber"
@@ -212,31 +256,17 @@ const Register = (props) => {
         <Grid item xs={6}>
           {" "}
           <div className="field">
-            <InputLabel htmlFor="email">E-mail</InputLabel>
+            <InputLabel htmlFor="email">E-mail*</InputLabel>
             <TextField
+              variant="outlined"
               type="email"
               name="email"
               id="email"
               placeholder="example.@example.com"
               onChange={handleInputChange}
+              error={emailBlank}
+              helperText={emailBlank ? "Campo obrigatório." : ""}
             />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="password1">Password</InputLabel>
-            <TextField
-              type="password"
-              name="password1"
-              id="password1"
-              onChange={handleInputChange}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="password2">Password, again</InputLabel>
-            <TextField type="password" name="password2" id="password2" />
           </div>
         </Grid>
         <Button
