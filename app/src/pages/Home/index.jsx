@@ -157,7 +157,7 @@ const Home = () => {
       useEffect(() => {
         loadScript(
           // `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places&language=pt_BR`,
-          `https://maps.googleapis.com/maps/api/js?key=AIzaSyCA_szvnsVf3nrqxMEkZFi54EcnMF9hces&libraries=places&language=pt_BR`,
+          `https://maps.googleapis.com/maps/api/js?key=&libraries=places&language=pt_BR`,
           () => handleScriptLoad(setQuery, autoCompleteRef)
         );
       }, []);
