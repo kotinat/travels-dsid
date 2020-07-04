@@ -28,10 +28,15 @@ const Search = (props) => {
   const [guest, setGuest] = useState("");
   const [cityBlankField, setCityBlankField] = useState(false);
   const [minDate, setMinDate] = useState(tomorrow);
+  const [guestBlankField, setGuestBlankField] = useState(false);
 
   function handleSubmit() {
-    if (city == "") {
+    if (city === "") {
       setCityBlankField(true);
+      return;
+    }
+    if (guest === "" || guest <= 0) {
+      setGuestBlankField(true);
       return;
     }
     props.onSearch({
@@ -42,15 +47,23 @@ const Search = (props) => {
       departureDate: transformDate(departureDate),
       guest: guest,
     });
+    if (cityBlankField === true) setCityBlankField(false);
+    if (guestBlankField === true) setGuestBlankField(false);
   }
 
   function handleCityChange(event) {
     setCity(event.target.value);
+    setCityBlankField(false);
   }
 
   function handleEntryDateChange(date) {
     setEntryDate(date);
     const newDepartureDate = new Date();
+    if (date === null) {
+      alert("A data não pode ficar em branco!");
+      setEntryDate(new Date());
+      return;
+    }
     setMinDate(newDepartureDate.setDate(date.getDate() + 1));
     if (date > departureDate) {
       setDepartureDate(newDepartureDate.setDate(date.getDate() + 1));
@@ -58,11 +71,17 @@ const Search = (props) => {
   }
 
   function handleDepartureDateChange(date) {
+    if (date === null) {
+      alert("A data não pode ficar em branco!");
+      setDepartureDate(tomorrow);
+      return;
+    }
     setDepartureDate(date);
   }
 
   function handleGuestChange(event) {
     setGuest(event.target.value);
+    setGuestBlankField(false);
   }
 
   return (
@@ -74,9 +93,9 @@ const Search = (props) => {
             onChange={handleCityChange}
             autoFocus
             fullWidth
-            // label="Obrigatório*"
             error={cityBlankField}
             helperText={cityBlankField ? "Preencha a cidade." : ""}
+            variant="outlined"
           />
         </Grid>
         <Grid item xs={5}>
@@ -98,15 +117,18 @@ const Search = (props) => {
             minDate={minDate}
           />
         </Grid>
-        <Grid item xs={8}>
+        {/* <Grid item xs={7}>
           <InputLabel htmlFor="guest">Quantas pessoas vão?</InputLabel>
-        </Grid>
-        <Grid item xs={2}>
+        </Grid> */}
+        <Grid item xs={3}>
+          <InputLabel htmlFor="guest">Quantas pessoas vão?</InputLabel>
           <TextField
             id="guest"
             type="number"
             onChange={handleGuestChange}
-            defaultValue={2}
+            error={guestBlankField}
+            helperText={guestBlankField ? "Mínimo 1 pessoa." : ""}
+            variant="outlined"
           />
         </Grid>
         <Grid container xs={12} justify="center">
