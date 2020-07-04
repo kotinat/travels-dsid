@@ -13,6 +13,8 @@ const BasicDatePicker = (props) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
+        inputVariant="outlined"
+        disablePast
         disableToolbar
         variant="inline"
         format="dd/MM/yyyy"
@@ -23,6 +25,7 @@ const BasicDatePicker = (props) => {
         KeyboardButtonProps={{
           "aria-label": "change date",
         }}
+        minDate={props.minDate ? props.minDate : new Date()}
       />
     </MuiPickersUtilsProvider>
   );

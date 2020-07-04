@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Paper, Typography } from "@material-ui/core";
+import { Button, Paper, Typography, CircularProgress } from "@material-ui/core";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
@@ -37,22 +37,26 @@ const details = {
 
 const Details = (props) => {
   const [showDetails, setShowDetails] = useState(true); // false
-  // const [details, setDetails] = useState();
+  // const [details, setDetails] = useState(); // comentar
+  const [loading, setLoading] = useState(false);
   const position = () => [
     details.location.latitude,
     details.location.longitude,
   ];
 
   // Chamada na API, comentado para deixar mockado
+  // COMENTAR TUDO
   // async function handleSearchAccomodation(id) {
   //   const ansioso = await getAccomodationDetailById(id);
   //   setDetails(ansioso);
   //   setShowDetails(true);
+  //   setLoading(false);
   // }
 
   // Faz a chamada assim que o componente Details é renderizado
   useEffect(() => {
-    //   handleSearchAccomodation(props.accomodationId);
+    setLoading(true);
+    // handleSearchAccomodation(props.accomodationId); // comentar
     props.setPrice(props.price);
   }, []);
 
@@ -75,6 +79,7 @@ const Details = (props) => {
       </header>
 
       <h1>Detalhes</h1>
+      {loading && <CircularProgress color="secondary" />}
       {showDetails && (
         <div>
           <Paper>

@@ -12,6 +12,7 @@ import { getStars } from "../../controllers/starRating";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    marginBottom: theme.spacing(3), 
   },
   details: {
     display: "flex",

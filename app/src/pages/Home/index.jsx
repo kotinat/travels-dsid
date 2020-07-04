@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
-
 // import { getCityIdByName, getAccomodationsById } from "../../services/api";
 import { testing } from "../../controllers/dateAccomodation";
-
 import "./home.css";
 
 const listaHospedagens = [
@@ -70,32 +68,45 @@ const listaHospedagens = [
 const Home = (props) => {
   const [data, setData] = useState([]);
   const [showList, setShowList] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function finalPrice(days, perNight) {
     return days * perNight;
   }
 
   async function handleSearch(obj) {
-    // const cityId = await getCityIdByName(obj.city)
+    setLoading(true);
+    // const cityId = await getCityIdByName(obj.city); // comentar
     const {
       entryDate,
       departureDate,
       unformattedEntryDate,
       unformattedDepartureDate,
     } = await obj;
-    // props.setCountOfDays(testing(unformattedEntryDate, unformattedDepartureDate));
+    // comentar abaixo
+    // props.setCountOfDays(
+    //   testing(unformattedEntryDate, unformattedDepartureDate)
+    // );
     const count = testing(unformattedEntryDate, unformattedDepartureDate);
     props.setCountOfDays(count);
-    // const accomodationsList = await getAccomodationsById(cityId, entryDate, departureDate);
+    // comentar abaixo
+    // const accomodationsList = await getAccomodationsById(
+    //   cityId,
+    //   entryDate,
+    //   departureDate
+    // );
     props.setPrice(finalPrice(props.countOfDays, props.price.perNight));
     setData(listaHospedagens); // accomodationsList
     setShowList(true);
+    setLoading(false);
   }
 
   return (
     <div className="page-home">
       <Header />
       <Search onSearch={handleSearch} />
+
+      {loading && <CircularProgress color="secondary" />}
       {showList && (
         <AccomodationsList
           data={data}
