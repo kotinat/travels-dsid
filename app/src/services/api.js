@@ -9,9 +9,9 @@ export const getCityIdByName = async (city) => {
       headers: {
         "x-rapidapi-host": "hotels4.p.rapidapi.com",
 <<<<<<< Updated upstream
-        "x-rapidapi-key": "c626a77cf3mshd941269529d5468p113f2bjsn3a0c3d574b63",
+        "x-rapidapi-key": ,
 =======
-        "x-rapidapi-key": "d5950d8e02mshdd95fe25e26b86fp1d723ejsn923735e66e08",
+        "x-rapidapi-key": ,
 >>>>>>> Stashed changes
       },
       params: {
@@ -34,9 +34,9 @@ export const getAccomodationsById = async (cityId) => {
     headers: {
       "x-rapidapi-host": "hotels4.p.rapidapi.com",
 <<<<<<< Updated upstream
-      "x-rapidapi-key": "c626a77cf3mshd941269529d5468p113f2bjsn3a0c3d574b63",
+      "x-rapidapi-key": ,
 =======
-      "x-rapidapi-key": "d5950d8e02mshdd95fe25e26b86fp1d723ejsn923735e66e08",
+      "x-rapidapi-key": ,
 >>>>>>> Stashed changes
     },
     params: {
@@ -71,9 +71,9 @@ export const getAccomodationDetailById = async (id) => {
       headers: {
         "x-rapidapi-host": "hotels4.p.rapidapi.com",
 <<<<<<< Updated upstream
-        "x-rapidapi-key": "c626a77cf3mshd941269529d5468p113f2bjsn3a0c3d574b63",
+        "x-rapidapi-key": ,
 =======
-        "x-rapidapi-key": "d5950d8e02mshdd95fe25e26b86fp1d723ejsn923735e66e08",
+        "x-rapidapi-key": ,
 >>>>>>> Stashed changes
       },
       params: {
