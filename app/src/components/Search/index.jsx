@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicDatePicker from "../BasicDatePicker";
+<<<<<<< Updated upstream
 
 import Script from "react-load-script"
+=======
+import { transformDate } from "../../controllers/dateAccomodation"
+>>>>>>> Stashed changes
 
 const useStyles = makeStyles((theme) => ({
   inputs: {
@@ -24,7 +28,7 @@ const Search = (props) => {
   const [entryDate, setEntryDate] = useState(new Date());
   const [departureDate, setDepartureDate] = useState(new Date());
   const [guest, setGuest] = useState("0");
-
+  console.log(city)
   function handleSubmit() {
     props.onSearch({
       city: city,
@@ -54,7 +58,14 @@ const Search = (props) => {
     <div className="container-search">
       <Grid container className={classes.inputs}>
         <Grid item xs={12}>
+<<<<<<< Updated upstream
           <TextField onChange={handleCityChange} />
+=======
+          {/* <TextField
+            placeholder="Digite aqui o seu próximo destino"
+            onChange={handleCityChange}
+          /> */}
+>>>>>>> Stashed changes
         </Grid>
         <Grid item xs={3}>
           <BasicDatePicker
@@ -86,8 +97,13 @@ const Search = (props) => {
           <Button
             className={classes.font}
             variant="contained"
+<<<<<<< Updated upstream
             color="primary"
             type="submit"
+=======
+            color="secondary"
+            type="button"
+>>>>>>> Stashed changes
             onClick={handleSubmit}
           >
             Procurar
