@@ -3,7 +3,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
-// import { getCityIdByName, getAccomodationsById } from "../../services/api";
+import { getCityIdByName, getAccomodationsById } from "../../services/api";
 import { testing } from "../../controllers/dateAccomodation";
 import "./home.css";
 
@@ -75,30 +75,36 @@ const Home = (props) => {
   }
 
   async function handleSearch(obj) {
-    setLoading(true);
-    // const cityId = await getCityIdByName(obj.city); // comentar
-    const {
-      entryDate,
-      departureDate,
-      unformattedEntryDate,
-      unformattedDepartureDate,
-    } = await obj;
-    // comentar abaixo
-    // props.setCountOfDays(
-    //   testing(unformattedEntryDate, unformattedDepartureDate)
-    // );
-    const count = testing(unformattedEntryDate, unformattedDepartureDate);
-    props.setCountOfDays(count);
-    // comentar abaixo
-    // const accomodationsList = await getAccomodationsById(
-    //   cityId,
-    //   entryDate,
-    //   departureDate
-    // );
-    props.setPrice(finalPrice(props.countOfDays, props.price.perNight));
-    setData(listaHospedagens); // accomodationsList
-    setShowList(true);
-    setLoading(false);
+    try {    
+      setLoading(true);
+      const cityId = await getCityIdByName(obj.city) // comentar
+      const {
+        entryDate,
+        departureDate,
+        unformattedEntryDate,
+        unformattedDepartureDate,
+      } = await obj;
+      // comentar abaixo
+      props.setCountOfDays(
+        testing(unformattedEntryDate, unformattedDepartureDate)
+      );
+      const count = testing(unformattedEntryDate, unformattedDepartureDate);
+      props.setCountOfDays(count);
+      // comentar abaixo
+      const accomodationsList = await getAccomodationsById(
+        cityId,
+        entryDate,
+        departureDate
+      );
+      props.setPrice(finalPrice(props.countOfDays, props.price.perNight));
+      setData(accomodationsList); // accomodationsList
+      setShowList(true);
+      setLoading(false);
+    } catch (err) {
+      alert(err)
+      setLoading(false);
+    }
+
   }
 
   return (
