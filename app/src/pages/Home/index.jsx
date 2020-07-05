@@ -134,6 +134,7 @@ const Home = (props) => {
           <AccomodationsList
             data={data}
             setAccomodationId={props.setAccomodationId}
+            setAccomodationImg={props.setAccomodationImg}
             setPrice={props.setPrice}
             total={props.total}
           />

@@ -18,6 +18,7 @@ const AccomodationsList = (props) => {
               src={accomodation.image.src}
               alt={accomodation.image.name}
               setAccomodationId={props.setAccomodationId}
+              setAccomodationImg={props.setAccomodationImg}
               setPrice={props.setPrice}
               total={props.total}
             />

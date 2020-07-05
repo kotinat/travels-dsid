@@ -8,6 +8,7 @@ import {
   Container,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
@@ -100,27 +101,45 @@ const Details = (props) => {
       {loading && <CircularProgress color="secondary" />}
       {showDetails && (
         <div>
-          <Paper>
-            <Typography variant="h4">{details.name}</Typography>
-            <Typography variant="body1">{getStars(details.rating)}</Typography>
-            <Typography variant="h5">
-              Comodidades
-              {details.amenities.map((comodidade, id) => (
-                <Typography key={id}>{comodidade}</Typography>
-              ))}
-            </Typography>
-            <Typography variant="h6">{`${props.price}/noite`}</Typography>
-            <Typography variant="h5">
-              {`Total da estadia, ${props.total()}`}
-            </Typography>
-            <Button
-              onClick={handlePickAccomodation}
-              variant="contained"
-              color="secondary"
-            >
-              Reservar
-            </Button>
-          </Paper>
+          <div>
+            <Paper>
+              <Typography variant="h4">{details.name}</Typography>
+              <Typography variant="body1">
+                {getStars(details.rating)}
+              </Typography>
+              <Typography variant="h5">
+                <ul className="amenities-list">
+                  Comodidades
+                  {details.amenities.map((comodidade, id) => (
+                    <Typography key={id}>
+                      <li>
+                        <CheckCircleIcon
+                          className="circle-icon"
+                          fontSize="small"
+                        />
+                        {comodidade}
+                      </li>
+                    </Typography>
+                  ))}
+                </ul>
+              </Typography>
+
+              <Typography variant="h6">{`${props.price}/noite`}</Typography>
+              <Typography variant="h5">
+                {`Total da estadia, ${props.total()}`}
+              </Typography>
+              <div>
+                <img src={props.accomodationImg} />
+              </div>
+              <Button
+                onClick={handlePickAccomodation}
+                variant="contained"
+                color="secondary"
+              >
+                Reservar
+              </Button>
+            </Paper>
+          </div>
 
           <div className="leaflet-container">
             <Map center={position()} zoom={15}>

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     // flex: "1 0 auto",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around",
+    justifyContent: "center",
     paddingLeft: "2rem",
     height: "13rem",
   },
@@ -40,14 +40,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 8px 20px rgba(34, 35, 58, 0.3)",
     marginLeft: theme.spacing(2),
   },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+  items: {
+    margin: theme.spacing(1),
   },
   button: {
     borderRadius: theme.spacing(1),
+    margin: theme.spacing(1),
   },
 }));
 
@@ -60,6 +58,8 @@ const CardAccomodation = (props) => {
   async function handleShowDetails() {
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
+    console.log(props);
+    props.setAccomodationImg(props.src);
     props.setPrice(convertedPrice);
     props.history.push("/details");
   }
@@ -74,13 +74,20 @@ const CardAccomodation = (props) => {
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h4" variant="h4">
+          <Typography className={classes.items} component="h4" variant="h4">
             {props.name}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography
+            className={classes.items}
+            variant="h6"
+            color="textSecondary"
+          >
             {getStars(props.stars)}
           </Typography>
-          <Typography variant="h6">{`R$${convertedPrice}/noite`}</Typography>
+          <Typography
+            className={classes.items}
+            variant="h6"
+          >{`R$${convertedPrice}/noite`}</Typography>
 
           <Button
             className={classes.button}
