@@ -128,6 +128,7 @@ const Home = (props) => {
         <Header showBack={false} showFoward={false} />
         {error && <Alert severity="error">{errorMessage}</Alert>}
         <Search onSearch={handleSearch} />
+
         {loading && <CircularProgress color="secondary" />}
         {showList && (
           <AccomodationsList
