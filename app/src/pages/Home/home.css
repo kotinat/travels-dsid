@@ -1,21 +1,21 @@
-.container-search {
-  margin: 0;
-  padding: 0;
-  background: url("../../assets/img/mountain-landscape.jpg");
-  background-size: cover;
+.container {
+  background: url("../../assets/img/montain-landscape2.png");
+  background-size: unset;
   background-position: center center;
+  height: 19rem;
 }
 
 body {
   background: #f0f0f5;
   -webkit-font-smoothing: antialiased;
   color: var(--text-color);
+  margin: 0;
 }
 
 body,
 input,
 button {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-family: Roboto, Helvetica, sans-serif;
 }
 
 h1,

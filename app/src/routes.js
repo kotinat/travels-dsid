@@ -8,6 +8,7 @@ import Payment from "./pages/Payment";
 
 const Routes = () => {
   const [accomodationId, setAccomodationId] = useState(null);
+  const [accomodationImg, setAccomodationImg] = useState();
   const [accomodation, setAccomodation] = useState({});
   const [price, setPrice] = useState(0);
   const [countOfDays, setCountOfDays] = useState(0);
@@ -20,6 +21,7 @@ const Routes = () => {
         render={() => (
           <Home
             setAccomodationId={setAccomodationId}
+            setAccomodationImg={setAccomodationImg}
             price={price}
             setPrice={setPrice}
             setCountOfDays={setCountOfDays}
@@ -34,6 +36,7 @@ const Routes = () => {
         render={() => (
           <Details
             accomodationId={accomodationId}
+            accomodationImg={accomodationImg}
             accomodation={accomodation}
             setAccomodation={setAccomodation}
             price={price}

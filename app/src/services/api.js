@@ -13,8 +13,10 @@ export const getCityIdByName = async (city) => {
         query: city,
       },
     }
+
   )
   console.log(result);
+
   return result.data.suggestions[0].entities[0].destinationId;
 };
 

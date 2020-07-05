@@ -6,35 +6,47 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import "./card-accomodation.css";
 
 import { getStars } from "../../controllers/starRating";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    marginBottom: theme.spacing(3), 
+    alignItems: "center",
+    marginBottom: theme.spacing(3),
+    borderRadius: theme.spacing(2),
+    boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+    background: "#ffffff",
+    height: "15rem",
   },
   details: {
     display: "flex",
     flexDirection: "column",
   },
   content: {
-    flex: "1 0 auto",
+    // flex: "1 0 auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    paddingLeft: "2rem",
+    height: "13rem",
   },
   cover: {
-    width: 151,
-  },
-  controls: {
+    width: "13rem",
+    height: "13rem",
+    borderRadius: theme.spacing(2),
     display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    boxShadow: "0px 8px 20px rgba(34, 35, 58, 0.3)",
+    marginLeft: theme.spacing(2),
   },
-  playIcon: {
-    height: 38,
-    width: 38,
+  items: {
+    margin: theme.spacing(1),
   },
-  font: "ubuntu",
+  button: {
+    borderRadius: theme.spacing(1),
+    margin: theme.spacing(1),
+  },
 }));
 
 const CardAccomodation = (props) => {
@@ -46,6 +58,8 @@ const CardAccomodation = (props) => {
   async function handleShowDetails() {
     setShowDetails(!showDetails);
     props.setAccomodationId(props.id);
+    console.log(props);
+    props.setAccomodationImg(props.src);
     props.setPrice(convertedPrice);
     props.history.push("/details");
   }
@@ -60,21 +74,28 @@ const CardAccomodation = (props) => {
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
+          <Typography className={classes.items} component="h4" variant="h4">
             {props.name}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography
+            className={classes.items}
+            variant="h6"
+            color="textSecondary"
+          >
             {getStars(props.stars)}
           </Typography>
-          <Typography>{`R$${convertedPrice}/noite`}</Typography>
+          <Typography
+            className={classes.items}
+            variant="h6"
+          >{`R$${convertedPrice}/noite`}</Typography>
 
           <Button
-            className={classes.font}
+            className={classes.button}
             onClick={handleShowDetails}
             variant="contained"
-            color="secondary"
+            color="primary"
           >
-            Detalhes
+            Ver Detalhes
           </Button>
         </CardContent>
       </div>

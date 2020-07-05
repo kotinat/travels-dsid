@@ -1,4 +1,51 @@
+body {
+  margin: 0;
+}
+
+.paper {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  display: flex;
+  flex-flow: column wrap;
+  width: 90%;
+  margin: 0;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.circle-icon {
+  padding: 0 8px 0 0;
+  color: #4caf50;
+}
+
+.container-img {
+  width: 30rem;
+  height: 20rem;
+  /* border: 1px solid black; */
+  background-size: cover;
+  background-position: center center;
+}
+
+.button {
+  border-radius: 5rem;
+}
+
+.leaflet-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
 .leaflet-container {
-  /* width: auto; */
   height: 50vh;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 24px;
 }
