@@ -1,51 +1,60 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import "./card-accomodation.css";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Box,
+} from "@material-ui/core";
 
 import { getStars } from "../../controllers/starRating";
+import { te } from "date-fns/locale";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: theme.spacing(3),
     borderRadius: theme.spacing(2),
     boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
     background: "#ffffff",
-    height: "15rem",
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
+    height: "16rem",
+    width: "100%",
+    padding: 0,
   },
   content: {
-    // flex: "1 0 auto",
+    textAlign: "end",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    paddingLeft: "2rem",
-    height: "13rem",
+    justifyContent: "space around",
+    maxWidth: "270px",
+    maxHeight: "13rem",
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(3),
+    padding: 0,
   },
   cover: {
     width: "13rem",
     height: "13rem",
     borderRadius: theme.spacing(2),
-    display: "flex",
     boxShadow: "0px 8px 20px rgba(34, 35, 58, 0.3)",
     marginLeft: theme.spacing(2),
   },
   items: {
-    // margin: theme.spacing(1),
+    display: "flex",
+    justifyContent: "flex-end",
+    width: "auto",
+    // marginBottom: theme.spacing(1),
   },
   button: {
+    alignSelf: "flex-end",
+    maxWidth: theme.spacing(20),
     borderRadius: theme.spacing(1),
-    margin: theme.spacing(1),
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -72,33 +81,33 @@ const CardAccomodation = (props) => {
         alt={props.alt}
         title={`${props.name}`}
       />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography className={classes.items} component="h4" variant="h4">
-            {props.name}
-          </Typography>
-          <Typography
+      <CardContent className={classes.content}>
+        <Typography className={classes.items} component="h4" variant="h4">
+          {props.name}
+        </Typography>
+        <Typography variant="body1" color="textSecondary">
+          <Box
             className={classes.items}
-            variant="h6"
-            color="textSecondary"
+            fontWeight="fontWeightBold"
+            fontSize="h6.fontSize"
           >
             {getStars(props.stars)}
-          </Typography>
-          <Typography
-            className={classes.items}
-            variant="h6"
-          >{`R$${convertedPrice}/noite`}</Typography>
+          </Box>
+        </Typography>
+        <Typography
+          className={classes.items}
+          variant="h6"
+        >{`R$${convertedPrice}/noite`}</Typography>
 
-          <Button
-            className={classes.button}
-            onClick={handleShowDetails}
-            variant="contained"
-            color="primary"
-          >
-            Ver Detalhes
-          </Button>
-        </CardContent>
-      </div>
+        <Button
+          className={classes.button}
+          onClick={handleShowDetails}
+          variant="contained"
+          color="primary"
+        >
+          Ver Detalhes
+        </Button>
+      </CardContent>
     </Card>
   );
 };

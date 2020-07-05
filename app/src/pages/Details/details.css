@@ -2,9 +2,15 @@ body {
   margin: 0;
 }
 
-.paper {
-  display: flex;
+.content-image{
+  display:flex;
+  flex-flow: column wrap;
   justify-content: space-between;
+  align-items: center;
+}
+
+ul .amenities-list{
+  margin: 0;
 }
 
 ul {
@@ -28,24 +34,19 @@ ul li {
 .container-img {
   width: 30rem;
   height: 20rem;
-  /* border: 1px solid black; */
   background-size: cover;
   background-position: center center;
-}
-
-.button {
-  border-radius: 5rem;
 }
 
 .leaflet-wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .leaflet-container {
   height: 50vh;
   width: 100%;
-  max-width: 650px;
   border-radius: 24px;
 }

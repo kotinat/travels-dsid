@@ -8,9 +8,11 @@ import {
   Container,
   Paper,
   Grid,
+  Box,
 } from "@material-ui/core";
 import qrPicPay from "../../assets/qrcode/picPay.png";
 import Header from "../../components/Header";
+import "./payment.css";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -56,7 +58,16 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 0, 3),
     borderRadius: theme.spacing(1),
   },
+  destaque: {
+    fontSize: theme.spacing(4),
+    fontWeight: "bold",
+  },
 }));
+
+const name = "Natalia";
+const priceTotal = "599";
+const _id = "fuw98fqnjr23kj42";
+const accommodationName = "Vila Sésamo";
 
 const Payment = (props) => {
   // const accommodationName = props.accomodation.name; // comentar
@@ -93,79 +104,70 @@ const Payment = (props) => {
     <Container>
       <Header showBack={false} showFoward={false} />
 
-      <Container maxWidth="sm">
-        <Paper className={classes.paper}>
-          <Grid container justify="center">
-            {/* <Typography
-              className={classes.item}
-              variant="h3"
-            >{`Olá, ${name}!`}</Typography> */}
-            <Typography
-              className={classes.item}
-              variant="h3"
-            >{`Olá, xxxxxxx!`}</Typography>
+      <Grid container justify="center">
+        <Grid item xs={9}>
+          <Paper className={classes.paper}>
+            <Grid item xs={12}>
+              <Typography
+                className={classes.item}
+                variant="h3"
+              >{`Olá, ${name}!`}</Typography>
 
-            {/* <Typography className={classes.item}>
-              {`Sua reserva em ${accommodationName} foi efetuada.`}
-            </Typography> */}
-            <Typography
-              className={classes.item}
-            >{`Sua reserva em xxxxxxxxx foi efetuada.`}</Typography>
+              <Typography className={classes.item}>
+                {`Sua reserva em ${accommodationName} foi efetuada.`}
+              </Typography>
 
-            {/* <Typography
-              className={classes.item}
-            >{`O código do seu pedido é ${_id}`}</Typography> */}
-            <Typography
-              className={classes.item}
-            >{`O código do seu pedido é xxxxxxxxxxxx`}</Typography>
+              <Typography className={classes.item}>
+                O código do seu pedido é <strong>{_id}</strong>
+              </Typography>
 
-            {/* <Typography className={classes.item}>
-              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$${priceTotal}`}
-            </Typography> */}
-            <Typography className={classes.item}>
-              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$xxxxx,xx`}
-            </Typography>
+              <Typography className={classes.item}>
+                Utilize o QRcode abaixo para realizar sua transferência no valor
+                de
+                <Box className={classes.destaque}>{`R$${priceTotal}`}</Box>
+              </Typography>
 
-            <Grid container justify="center">
-              <Button
-                onClick={handleModal}
-                variant="contained"
-                color="primary"
-                className={classes.button}
-              >
-                Mostrar QRcode
-              </Button>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-              >
-                {body}
-              </Modal>
+              <Grid container justify="center">
+                <Button
+                  onClick={handleModal}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Mostrar QRcode
+                </Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                >
+                  {body}
+                </Modal>
+              </Grid>
+
+              <Typography className={classes.item}>
+                Em caso de dúvidas, entre em contato pelo e-mail:
+                <Box fontWeight="fontWeightBold"> contato@tripfindr.com</Box>
+              </Typography>
+              <Typography className={classes.item}>
+                Agradecemos a sua preferência. Até breve!
+              </Typography>
+
+              <Grid container justify="center">
+                <Button
+                  href="/"
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Página inicial
+                </Button>
+              </Grid>
             </Grid>
-
-            <Typography className={classes.item}>
-              Em caso de dúvidas, nos acione no e-mail:
-              <strong> contato@tripfindr.com</strong>
-            </Typography>
-            <Typography className={classes.item}>
-              Agradecemos a sua preferência. Até breve!
-            </Typography>
-
-            <Grid container justify="center">
-              <Button
-                href="/"
-                variant="contained"
-                color="primary"
-                className={classes.button}
-              >
-                Página inicial
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
+          </Paper>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

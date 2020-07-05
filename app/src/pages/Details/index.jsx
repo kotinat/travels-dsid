@@ -133,12 +133,12 @@ const Details = (props) => {
       {error && <Alert severity="error">{errorMessage}</Alert>}
       {loading && <CircularProgress color="secondary" />}
       {showDetails && (
-        <div>
-          <Grid container justify="center">
-            <Paper className={classes.paper} maxWidth="md">
-              <div className="content">
+        <Grid container justify="center">
+          <Grid item xs={9} justify="center">
+            <Paper className={classes.paper}>
+              <div className="content-info">
                 <Typography className={classes.items} variant="h4">
-                  {details.name}
+                  <Box fontWeight="fontWeightBold">{details.name}</Box>
                 </Typography>
                 <Typography variant="body1">
                   <Box
@@ -167,7 +167,7 @@ const Details = (props) => {
                 </Typography>
               </div>
 
-              <div className="content">
+              <div className="content-image">
                 <div
                   className={classes.imageContainer}
                   style={{
@@ -177,9 +177,9 @@ const Details = (props) => {
                 <Typography
                   className={classes.items}
                   variant="h6"
-                >{`${props.price}/noite`}</Typography>
-                <Typography className={classes.items} variant="h5">
-                  {`Total da estadia, ${props.total()}`}
+                >{`R$${props.price}/por noite`}</Typography>
+                <Typography className={classes.items} variant="h4">
+                  <Box fontWeight="fontWeightBold">{`R$${props.total()}, total`}</Box>
                 </Typography>
                 <Button
                   className={classes.button}
@@ -201,21 +201,23 @@ const Details = (props) => {
             </Paper>
           </Grid>
 
-          <div className="leaflet-wrapper">
-            <div className="leaflet-container">
-              <Map center={position()} zoom={15}>
-                <TileLayer
-                  attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  height="200px"
-                />
-                <Marker position={position()}>
-                  <Popup>{details.name}</Popup>
-                </Marker>
-              </Map>
+          <Grid item xs={9}>
+            <div className="leaflet-wrapper">
+              <div className="leaflet-container">
+                <Map center={position()} zoom={15}>
+                  <TileLayer
+                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    height="200px"
+                  />
+                  <Marker position={position()}>
+                    <Popup>{details.name}</Popup>
+                  </Marker>
+                </Map>
+              </div>
             </div>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       )}
     </Container>
   );
