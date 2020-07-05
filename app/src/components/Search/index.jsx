@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2),
     },
   },
+  button: {
+    borderRadius: theme.spacing(1),
+  },
 }));
 
 const Search = (props) => {
@@ -137,6 +140,7 @@ const Search = (props) => {
                 color="primary"
                 type="submit"
                 onClick={handleSubmit}
+                className={classes.button}
               >
                 Procurar
               </Button>

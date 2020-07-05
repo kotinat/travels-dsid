@@ -72,8 +72,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "148px",
   },
   button: {
-    width: theme.spacing(15),
-    padding: theme.spacing(1),
+    minWidth: theme.spacing(14),
     margin: theme.spacing(2),
     borderRadius: theme.spacing(1),
   },
@@ -121,7 +120,11 @@ const Register = (props) => {
       <p id="simple-modal-description">Cadastro efetuado com sucesso!</p>
       <span>
         <Link to="/payment" style={{ textDecoration: "none" }}>
-          <Button variant="contained" color="primary">
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+          >
             Ir para o pagamento
           </Button>
         </Link>

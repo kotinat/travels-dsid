@@ -115,6 +115,7 @@ const Home = (props) => {
       setData(listaHospedagens); // accomodationsList
       setShowList(true);
       setLoading(false);
+      setError(false);
     } catch (err) {
       setError(true);
       setLoading(false);

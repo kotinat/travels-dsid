@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     borderRadius: theme.spacing(1),
+    width: theme.spacing(14),
   },
 }));
 
@@ -114,6 +115,10 @@ const Details = (props) => {
     e.preventDefault();
     props.setAccomodation(details);
     props.history.push("/register");
+  }
+
+  function handleCancel() {
+    props.history.push("/");
   }
 
   return (
@@ -176,6 +181,14 @@ const Details = (props) => {
                 <Typography className={classes.items} variant="h5">
                   {`Total da estadia, ${props.total()}`}
                 </Typography>
+                <Button
+                  className={classes.button}
+                  onClick={handleCancel}
+                  variant="contained"
+                  color="primary"
+                >
+                  Cancelar
+                </Button>
                 <Button
                   className={classes.button}
                   onClick={handlePickAccomodation}
