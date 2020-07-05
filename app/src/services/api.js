@@ -13,8 +13,13 @@ export const getCityIdByName = async (city) => {
         query: city,
       },
     }
+<<<<<<< HEAD
   );
   // console.log(result);
+=======
+  )
+  console.log(result);
+>>>>>>> c6729114e57a107b505f75455e3e44cba69f8d70
   return result.data.suggestions[0].entities[0].destinationId;
 };
 
@@ -38,8 +43,7 @@ export const getAccomodationsById = async (
       adults1: 2,
       currency: "BRL",
     },
-  });
-
+  })
   const parsedResult = result.data.data.body.searchResults.results.map(
     (item) => ({
       id: item.id,
@@ -53,7 +57,7 @@ export const getAccomodationsById = async (
     })
   );
 
-  // console.log(parsedResult);
+  console.log(parsedResult);
 
   return parsedResult;
 };
@@ -71,8 +75,7 @@ export const getAccomodationDetailById = async (id) => {
         id: id,
       },
     }
-  );
-
+  )
   const { data } = result.data;
   const { body } = data;
   const { name, starRating } = body.propertyDescription;
@@ -91,6 +94,6 @@ export const getAccomodationDetailById = async (id) => {
       longitude,
     },
   };
-  // console.log(hospedagem);
+  console.log(hospedagem);
   return hospedagem;
 };

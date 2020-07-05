@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
 import {
   Button,
   Paper,
@@ -15,6 +14,7 @@ import Header from "../../components/Header";
 import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api"; // comentar
+
 import { getStars } from "../../controllers/starRating";
 
 const details = {
@@ -54,10 +54,17 @@ const Details = (props) => {
   // Chamada na API, comentado para deixar mockado
   // COMENTAR TUDO
   // async function handleSearchAccomodation(id) {
-  //   const ansioso = await getAccomodationDetailById(id);
-  //   setDetails(ansioso);
-  //   setShowDetails(true);
-  //   setLoading(false);
+  //   try{
+  //     const ansioso = await getAccomodationDetailById(id);
+  //     setDetails(ansioso);
+  //     setShowDetails(true);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     alert(err)
+  //     setLoading(false);
+  //     props.history.push("/");
+  //     console.log(err)
+  //   }
   // }
 
   // Faz a chamada assim que o componente Details é renderizado

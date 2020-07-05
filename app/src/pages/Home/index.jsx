@@ -85,35 +85,40 @@ const Home = (props) => {
   }
 
   async function handleSearch(obj) {
-    setLoading(true);
-    // const cityId = await getCityIdByName(obj.city); // comentar
-    const {
-      // entryDate,
-      // departureDate,
-      unformattedEntryDate,
-      unformattedDepartureDate,
-    } = await obj;
-    // comentar abaixo
-    // props.setCountOfDays(
-    //   testing(unformattedEntryDate, unformattedDepartureDate)
-    // );
-    const count = testing(unformattedEntryDate, unformattedDepartureDate);
-    props.setCountOfDays(count);
-    // comentar abaixo
-    // const accomodationsList = await getAccomodationsById(
-    //   cityId,
-    //   entryDate,
-    //   departureDate
-    // );
-    props.setPrice(finalPrice(props.countOfDays, props.price.perNight));
-    setData(listaHospedagens); // accomodationsList
-    setShowList(true);
-    setLoading(false);
+    try {
+      setLoading(true);
+      // const cityId = await getCityIdByName(obj.city) // comentar
+      const {
+        entryDate,
+        departureDate,
+        unformattedEntryDate,
+        unformattedDepartureDate,
+      } = await obj;
+      // comentar abaixo
+      // props.setCountOfDays(
+      //   testing(unformattedEntryDate, unformattedDepartureDate)
+      // );
+      const count = testing(unformattedEntryDate, unformattedDepartureDate);
+      props.setCountOfDays(count);
+      // comentar abaixo
+      // const accomodationsList = await getAccomodationsById(
+      //   cityId,
+      //   entryDate,
+      //   departureDate
+      // );
+      props.setPrice(finalPrice(props.countOfDays, props.price.perNight));
+      setData(listaHospedagens); // accomodationsList
+      setShowList(true);
+      setLoading(false);
+    } catch (err) {
+      alert(err);
+      setLoading(false);
+    }
   }
 
   return (
     <Container>
-      <Header showBack={false} showFoward={false}/>
+      <Header showBack={false} showFoward={false} />
       <Search onSearch={handleSearch} />
 
       {loading && <CircularProgress color="secondary" />}

@@ -145,21 +145,29 @@ const Register = (props) => {
     };
 
     setLoading(true);
-    // const newUser = await register.post("register", JSON.stringify(data));
-    setLoading(false);
-    // const order = {
-    //   name: name,
-    //   accommodationId: props.accomodationId,
-    //   pricePerNight: props.price,
-    //   priceTotal: props.total(),
-    //   userId: newUser.data.user._id,
-    // };
 
-    // const newOrder = await apiorder.post("orders", JSON.stringify(order));
+    try{
+      // const newUser = await register.post("register", JSON.stringify(data));
+      setLoading(false);
+      // const order = {
+      //   name: name,
+      //   accommodationId: props.accomodationId,
+      //   pricePerNight: props.price,
+      //   priceTotal: props.total(),
+      //   userId: newUser.data.user._id,
+      // };
 
-    // props.setOrder(newOrder);
-    setLoading(false);
-    handleOpen();
+      // const newOrder = await apiorder.post("orders", JSON.stringify(order));
+
+      // props.setOrder(newOrder);
+      setLoading(false);
+      handleOpen();
+    } catch (err) {
+      console.log(err)
+      setLoading(false);
+      if (err.message.includes("406")) console.log("Já existe")
+      else console.log("outro")
+    }
   }
 
   return (
