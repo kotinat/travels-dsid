@@ -83,7 +83,7 @@ const CardAccomodation = (props) => {
       />
       <CardContent className={classes.content}>
         <Typography className={classes.items} component="h4" variant="h4">
-          {props.name}
+          <Box fontWeight="600">{props.name}</Box>
         </Typography>
         <Typography variant="body1" color="textSecondary">
           <Box
@@ -94,10 +94,9 @@ const CardAccomodation = (props) => {
             {getStars(props.stars)}
           </Box>
         </Typography>
-        <Typography
-          className={classes.items}
-          variant="h6"
-        >{`R$${convertedPrice}/noite`}</Typography>
+        <Typography className={classes.items} variant="h6">
+          R$<strong>{convertedPrice}</strong>/noite
+        </Typography>
 
         <Button
           className={classes.button}

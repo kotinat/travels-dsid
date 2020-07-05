@@ -7,7 +7,9 @@ const AccomodationsList = (props) => {
   return (
     <Container maxWidth="sm" className="container-list" justify="center">
       <Grid justify="center">
-        <Typography style={{marginBottom: "12px"}} variant="h6">Hospedagens para você</Typography>
+        <Typography style={{ marginBottom: "12px" }} variant="h6">
+          Hospedagens para você
+        </Typography>
         <ul>
           {props.data.map((accomodation, id) => (
             <li key={id}>
