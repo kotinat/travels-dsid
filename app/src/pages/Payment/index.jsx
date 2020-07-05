@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button, Modal } from "@material-ui/core";
+import { Typography, Button, Modal, Container } from "@material-ui/core";
 import qrPicPay from "../../assets/qrcode/picPay.png";
+import Header from "../../components/Header";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -33,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Payment = (props) => {
-  const accommodationName = props.accomodation.name;
-  const { name, priceTotal, _id } = props.order.data.accommodationOrder;
+  // const accommodationName = props.accomodation.name;
+  // const { name, priceTotal, _id } = props.order.data.accommodationOrder;
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -64,27 +65,27 @@ const Payment = (props) => {
   );
 
   return (
-    <div>
-      <header>
-        <span>
-          <Link to="/register">Voltar para o cadastro</Link>
-        </span>
-        <span>----|----</span>
-        <span>
-          <Link to="/">Voltar para a Home</Link>
-        </span>
+    <Container>
+      <Header showBack={false} showFoward={false} />
 
-        <h1>Pagamento</h1>
-      </header>
+      {/* <Typography variant="h3">{`Olá, ${name}!`}</Typography> */}
+      <Typography variant="h3">{`Olá, xxxxxxx!`}</Typography>
 
-      <Typography variant="h3">{`Olá, ${name}!`}</Typography>
+      {/* <Typography>
+        {`Sua reserva em ${accommodationName} foi efetuada.`}
+      </Typography> */}
+      <Typography>{`Sua reserva em xxxxxxxxx foi efetuada.`}</Typography>
+
+      {/* <Typography>{`O código do seu pedido é ${_id}`}</Typography> */}
+      <Typography>{`O código do seu pedido é xxxxxxxxxxxx`}</Typography>
+
+      {/* <Typography>
+        {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$${priceTotal}`}
+      </Typography> */}
       <Typography>
-        {`Sua reserva para ${accommodationName} foi efetuada.`}
+        {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$xxxxx,xx`}
       </Typography>
-      <Typography>{`O número do seu pedido é ${_id}`}</Typography>
-      <Typography>
-        {`Utilize o QRcode abaixo para reaizar sua transferência no valor de R$${priceTotal}`}
-      </Typography>
+
       <Button onClick={handleModal} variant="contained" color="secondary">
         Mostrar QRcode
       </Button>
@@ -98,14 +99,14 @@ const Payment = (props) => {
       </Modal>
       <Typography>
         Em caso de dúvidas, nos acione no e-mail:{" "}
-        <strong>contato@awesometravels.com</strong>
+        <strong>contato@tripfindr.com</strong>
       </Typography>
       <Typography>Agradecemos a sua preferência. Até breve!</Typography>
 
       <Button href="/" variant="contained" color="secondary">
         Página inicial
       </Button>
-    </div>
+    </Container>
   );
 };
 

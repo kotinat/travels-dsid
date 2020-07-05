@@ -11,6 +11,8 @@ import {
   Select,
   Modal,
   CircularProgress,
+  Typography,
+  Container
 } from "@material-ui/core";
 import {
   DatePicker,
@@ -21,7 +23,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import axios from "axios";
 import register from "../../services/register";
 import apiorder from "../../services/apiorder";
-
+import Header from "../../components/Header";
 import "./register.css";
 
 function rand() {
@@ -143,36 +145,33 @@ const Register = (props) => {
     };
 
     setLoading(true);
-    const newUser = await register.post("register", JSON.stringify(data));
+    // const newUser = await register.post("register", JSON.stringify(data));
     setLoading(false);
-    const order = {
-      name: name,
-      accommodationId: props.accomodationId,
-      pricePerNight: props.price,
-      priceTotal: props.total(),
-      userId: newUser.data.user._id,
-    };
+    // const order = {
+    //   name: name,
+    //   accommodationId: props.accomodationId,
+    //   pricePerNight: props.price,
+    //   priceTotal: props.total(),
+    //   userId: newUser.data.user._id,
+    // };
 
-    const newOrder = await apiorder.post("orders", JSON.stringify(order));
+    // const newOrder = await apiorder.post("orders", JSON.stringify(order));
 
-    props.setOrder(newOrder);
+    // props.setOrder(newOrder);
     setLoading(false);
     handleOpen();
   }
 
   return (
-    <div>
-      <header>
-        <span>
-          <Link to="/details">Voltar para os detalhes</Link>
-        </span>
-        <span>----|----</span>
-        <span>
-          <Link to="/payment">Ir para o pagamento</Link>
-        </span>
-      </header>
+    <Container>
+      <Header
+        showBack={false}
+        back={"/details"}
+        showFoward={false}
+        foward={"/payment"}
+      />
 
-      <h1>Cadastro</h1>
+      <Typography variant="h4">Cadastro</Typography>
 
       <Grid container>
         <Grid item xs={6}>
@@ -287,7 +286,7 @@ const Register = (props) => {
           {body}
         </Modal>
       </Grid>
-    </div>
+    </Container>
   );
 };
 

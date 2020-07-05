@@ -13,23 +13,9 @@ export const getCityIdByName = async (city) => {
         query: city,
       },
     }
-  )
-    .then((result) => {
-      if (
-        result.data.suggestions[0].entities[0] === [] ||
-        result.data.suggestions[0].entities[0] === "" ||
-        result.data.suggestions[0].entities[0] === undefined ||
-        !result.data.suggestions[0].entities[0]
-      ) {
-        return Promise.reject();
-      }
-      console.log(result);
-      return result.data.suggestions[0].entities[0].destinationId;
-    })
-    .catch((error) => {
-      console.log(error);
-      return;
-    });
+  );
+  // console.log(result);
+  return result.data.suggestions[0].entities[0].destinationId;
 };
 
 export const getAccomodationsById = async (
@@ -37,10 +23,6 @@ export const getAccomodationsById = async (
   entryDate,
   departureDate
 ) => {
-  if (!cityId || cityId === null || cityId === "" || cityId === undefined) {
-    alert("Não foi possível encontrar a cidade");
-    return Promise.reject();
-  }
   const result = await axios("https://hotels4.p.rapidapi.com/properties/list", {
     headers: {
       "x-rapidapi-host": process.env.REACT_APP_x_rapidapi_host,
@@ -56,30 +38,24 @@ export const getAccomodationsById = async (
       adults1: 2,
       currency: "BRL",
     },
-  })
-    .then((result) => {
-      console.log(result);
-      const parsedResult = result.data.data.body.searchResults.results.map(
-        (item) => ({
-          id: item.id,
-          name: item.name,
-          image: {
-            src: item.thumbnailUrl,
-            name: item.name,
-          },
-          rating: item.starRating,
-          price: item.ratePlan.price.exactCurrent,
-        })
-      );
+  });
 
-      console.log(parsedResult);
-
-      return parsedResult;
+  const parsedResult = result.data.data.body.searchResults.results.map(
+    (item) => ({
+      id: item.id,
+      name: item.name,
+      image: {
+        src: item.thumbnailUrl,
+        name: item.name,
+      },
+      rating: item.starRating,
+      price: item.ratePlan.price.exactCurrent,
     })
-    .catch((error) => {
-      console.log(error);
-      return;
-    });
+  );
+
+  // console.log(parsedResult);
+
+  return parsedResult;
 };
 
 export const getAccomodationDetailById = async (id) => {
@@ -115,6 +91,6 @@ export const getAccomodationDetailById = async (id) => {
       longitude,
     },
   };
-  console.log(hospedagem);
+  // console.log(hospedagem);
   return hospedagem;
 };

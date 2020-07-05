@@ -1,18 +1,24 @@
 import React from "react";
-import { makeStyles } from "@material-ui//core/styles";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import logo from "../../assets/img/tripFindr.png";
+import "./header.css";
 
-const useStyles = makeStyles(() => ({
-  font: {
-    fontFamily: "ubuntu",
+const useStyles = makeStyles((theme) => ({
+  header: {
+    "& > *": {
+      margin: theme.spacing(2),
+    },
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
   return (
-    <header className={classes.font}>
-      <h1>Awesome Travels</h1>
-      <p>Go far.</p>
+    <header className={classes.header}>
+      <img className="logo" src={logo} />
+      {props.showBack && <Link to={props.back}>Voltar</Link>}
+      {props.showFoward && <Link to={props.foward}>Avançar</Link>}
     </header>
   );
 };
