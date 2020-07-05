@@ -1,6 +1,11 @@
 header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+div a {
+  padding-left: 20px;
 }
 .logo {
   width: 10rem;
