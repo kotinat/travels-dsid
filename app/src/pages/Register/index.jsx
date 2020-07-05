@@ -16,11 +16,7 @@ import {
   Paper,
   Box,
 } from "@material-ui/core";
-import {
-  DatePicker,
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import axios from "axios";
 import register from "../../services/register";
@@ -74,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     width: "229px",
     minWidth: "148px",
-    // border: "1px black solid",
   },
   button: {
     width: theme.spacing(15),
@@ -105,6 +100,7 @@ const Register = (props) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  // state validações do form
   const [nameBlank, setNameBlank] = useState(false);
   const [surnameBlank, setSurnameBlank] = useState(false);
   const [emailBlank, setEmailBlank] = useState(false);
@@ -139,9 +135,6 @@ const Register = (props) => {
     setselectedGender(event.target.value);
   };
 
-  // const handleDateChange = (event) => {
-  //   setselectedDate(event.target.value);
-  // };
   // função que captura interação de input, genericamente
   // assim não é preciso fazer um handle para cada campo
   function handleInputChange(event) {
@@ -191,20 +184,20 @@ const Register = (props) => {
     setLoading(true);
 
     try {
-      const newUser = await register.post("register", JSON.stringify(data)); // comentar
+      // const newUser = await register.post("register", JSON.stringify(data)); // comentar
       setLoading(false);
       // comentar
-      const order = {
-        name: name,
-        accommodationId: props.accomodationId,
-        pricePerNight: props.price,
-        priceTotal: props.total(),
-        userId: newUser.data.user._id,
-      };
+      // const order = {
+      //   name: name,
+      //   accommodationId: props.accomodationId,
+      //   pricePerNight: props.price,
+      //   priceTotal: props.total(),
+      //   userId: newUser.data.user._id,
+      // };
 
-      const newOrder = await apiorder.post("orders", JSON.stringify(order));
+      // const newOrder = await apiorder.post("orders", JSON.stringify(order));
 
-      props.setOrder(newOrder);
+      // props.setOrder(newOrder);
       // até aqui
       setLoading(false);
       handleOpen();

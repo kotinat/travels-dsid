@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
@@ -60,8 +59,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Payment = (props) => {
-  const accommodationName = props.accomodation.name; // comentar
-  const { name, priceTotal, _id } = props.order.data.accommodationOrder; // comentar
+  // const accommodationName = props.accomodation.name; // comentar
+  // const { name, priceTotal, _id } = props.order.data.accommodationOrder; // comentar
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -97,35 +96,35 @@ const Payment = (props) => {
       <Container maxWidth="sm">
         <Paper className={classes.paper}>
           <Grid container justify="center">
-            <Typography
-              className={classes.item}
-              variant="h3"
-            >{`Olá, ${name}!`}</Typography>
             {/* <Typography
               className={classes.item}
               variant="h3"
-            >{`Olá, xxxxxxx!`}</Typography> */}
-
-            <Typography className={classes.item}>
-              {`Sua reserva em ${accommodationName} foi efetuada.`}
-            </Typography>
-            {/* <Typography
-              className={classes.item}
-            >{`Sua reserva em xxxxxxxxx foi efetuada.`}</Typography> */}
-
+            >{`Olá, ${name}!`}</Typography> */}
             <Typography
               className={classes.item}
-            >{`O código do seu pedido é ${_id}`}</Typography>
-            {/* <Typography
-              className={classes.item}
-            >{`O código do seu pedido é xxxxxxxxxxxx`}</Typography> */}
+              variant="h3"
+            >{`Olá, xxxxxxx!`}</Typography>
 
-            <Typography className={classes.item}>
-              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$${priceTotal}`}
-            </Typography>
             {/* <Typography className={classes.item}>
-              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$xxxxx,xx`}
+              {`Sua reserva em ${accommodationName} foi efetuada.`}
             </Typography> */}
+            <Typography
+              className={classes.item}
+            >{`Sua reserva em xxxxxxxxx foi efetuada.`}</Typography>
+
+            {/* <Typography
+              className={classes.item}
+            >{`O código do seu pedido é ${_id}`}</Typography> */}
+            <Typography
+              className={classes.item}
+            >{`O código do seu pedido é xxxxxxxxxxxx`}</Typography>
+
+            {/* <Typography className={classes.item}>
+              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$${priceTotal}`}
+            </Typography> */}
+            <Typography className={classes.item}>
+              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$xxxxx,xx`}
+            </Typography>
 
             <Grid container justify="center">
               <Button
