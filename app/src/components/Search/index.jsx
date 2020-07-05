@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  Grid,
-  TextField,
-  Button,
-  Container,
-  InputLabel,
-} from "@material-ui/core";
+import { Grid, TextField, Button, Container } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicDatePicker from "../BasicDatePicker";
 import { transformDate } from "../../controllers/dateAccomodation";
@@ -126,17 +121,20 @@ const Search = (props) => {
               id="guest"
               type="number"
               onChange={handleGuestChange}
-              placeholder="tut"
+              placeholder="Guests"
               error={guestBlankField}
               helperText={guestBlankField ? "Mínimo 1 pessoa." : ""}
               variant="standard"
             />
           </Grid>
+          <Grid container justify="center" alignItems="center" xs={1}>
+            <PersonIcon color="action" />
+          </Grid>
           <Grid item xs={5}>
             <Grid container justify="flex-end">
               <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 type="submit"
                 onClick={handleSubmit}
               >
