@@ -1,8 +1,8 @@
 .container {
   background: url("../../assets/img/montain-landscape2.png");
-  background-size: auto;
+  background-size: unset;
   background-position: center center;
-  margin: 0;
+  height: 19rem;
 }
 
 body {
