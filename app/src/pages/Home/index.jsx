@@ -68,13 +68,13 @@ const listaHospedagens = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
-  inputs: {
-    "& > *": {
-      margin: theme.spacing(2),
-    },
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   inputs: {
+//     "& > *": {
+//       margin: theme.spacing(),
+//     },
+//   },
+// }));
 
 const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
 
@@ -83,7 +83,7 @@ const Home = (props) => {
   const [showList, setShowList] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const classes = useStyles();
+  // const classes = useStyles();
 
   function finalPrice(days, perNight) {
     return days * perNight;
@@ -123,20 +123,22 @@ const Home = (props) => {
   }
 
   return (
-    <Container>
-      <Header showBack={false} showFoward={false} />
-      {error && <Alert severity="error">{errorMessage}</Alert>}
-      <Search onSearch={handleSearch} />
-      {loading && <CircularProgress color="secondary" />}
-      {showList && (
-        <AccomodationsList
-          data={data}
-          setAccomodationId={props.setAccomodationId}
-          setPrice={props.setPrice}
-          total={props.total}
-        />
-      )}
-    </Container>
+    <div className="container">
+      <Container>
+        <Header showBack={false} showFoward={false} />
+        {error && <Alert severity="error">{errorMessage}</Alert>}
+        <Search onSearch={handleSearch} />
+        {loading && <CircularProgress color="secondary" />}
+        {showList && (
+          <AccomodationsList
+            data={data}
+            setAccomodationId={props.setAccomodationId}
+            setPrice={props.setPrice}
+            total={props.total}
+          />
+        )}
+      </Container>
+    </div>
   );
 };
 

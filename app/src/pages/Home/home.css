@@ -1,13 +1,15 @@
-.container-search {
-  background: url("../../assets/img/mountain-landscape.jpg");
-  background-size: cover;
+.container {
+  background: url("../../assets/img/montain-landscape2.png");
+  background-size: auto;
   background-position: center center;
+  margin: 0
 }
 
 body {
   background: #f0f0f5;
   -webkit-font-smoothing: antialiased;
   color: var(--text-color);
+  margin: 0;
 }
 
 body,
