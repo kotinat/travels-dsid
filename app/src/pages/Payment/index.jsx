@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button, Modal, Container } from "@material-ui/core";
+import {
+  Typography,
+  Button,
+  Modal,
+  Container,
+  Paper,
+  Grid,
+} from "@material-ui/core";
 import qrPicPay from "../../assets/qrcode/picPay.png";
 import Header from "../../components/Header";
 
@@ -22,14 +29,33 @@ function getModalStyle() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  modal: {
     position: "absolute",
     justifyContent: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(4),
+  },
+  paper: {
+    borderRadius: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    padding: theme.spacing(3),
+    margin: theme.spacing(3),
+  },
+  item: {
+    marginBottom: theme.spacing(2),
+    textAlign: "center",
+  },
+  button: {
+    width: theme.spacing(22),
+    margin: theme.spacing(1, 0, 3),
+    borderRadius: theme.spacing(1),
   },
 }));
 
@@ -54,9 +80,9 @@ const Payment = (props) => {
   };
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
+    <div style={modalStyle} className={classes.modal}>
       <h2 id="simple-modal-title">Quase lá...</h2>
-      <p id="simple-modal-description">
+      <p id="simple-modal-description" style={{ textAlign: "center" }}>
         Utilize a câmera do seu celular para escanear o QRcode abaixo e realizar
         o pagamento do seu pedido.
       </p>
@@ -68,44 +94,74 @@ const Payment = (props) => {
     <Container>
       <Header showBack={false} showFoward={false} />
 
-      {/* <Typography variant="h3">{`Olá, ${name}!`}</Typography> */}
-      <Typography variant="h3">{`Olá, xxxxxxx!`}</Typography>
+      <Container maxWidth="sm">
+        <Paper className={classes.paper}>
+          <Grid container justify="center">
+            {/* <Typography variant="h3">{`Olá, ${name}!`}</Typography> */}
+            <Typography
+              className={classes.item}
+              variant="h3"
+            >{`Olá, xxxxxxx!`}</Typography>
 
-      {/* <Typography>
+            {/* <Typography>
         {`Sua reserva em ${accommodationName} foi efetuada.`}
       </Typography> */}
-      <Typography>{`Sua reserva em xxxxxxxxx foi efetuada.`}</Typography>
+            <Typography
+              className={classes.item}
+            >{`Sua reserva em xxxxxxxxx foi efetuada.`}</Typography>
 
-      {/* <Typography>{`O código do seu pedido é ${_id}`}</Typography> */}
-      <Typography>{`O código do seu pedido é xxxxxxxxxxxx`}</Typography>
+            {/* <Typography>{`O código do seu pedido é ${_id}`}</Typography> */}
+            <Typography
+              className={classes.item}
+            >{`O código do seu pedido é xxxxxxxxxxxx`}</Typography>
 
-      {/* <Typography>
+            {/* <Typography>
         {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$${priceTotal}`}
       </Typography> */}
-      <Typography>
-        {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$xxxxx,xx`}
-      </Typography>
+            <Typography className={classes.item}>
+              {`Utilize o QRcode abaixo para realizar sua transferência no valor de R$xxxxx,xx`}
+            </Typography>
 
-      <Button onClick={handleModal} variant="contained" color="secondary">
-        Mostrar QRcode
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-      <Typography>
-        Em caso de dúvidas, nos acione no e-mail:{" "}
-        <strong>contato@tripfindr.com</strong>
-      </Typography>
-      <Typography>Agradecemos a sua preferência. Até breve!</Typography>
+            <Grid container justify="center">
+              <Button
+                onClick={handleModal}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Mostrar QRcode
+              </Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+              >
+                {body}
+              </Modal>
+            </Grid>
 
-      <Button href="/" variant="contained" color="secondary">
-        Página inicial
-      </Button>
+            <Typography className={classes.item}>
+              Em caso de dúvidas, nos acione no e-mail:
+              <strong> contato@tripfindr.com</strong>
+            </Typography>
+            <Typography className={classes.item}>
+              Agradecemos a sua preferência. Até breve!
+            </Typography>
+
+            <Grid container justify="center">
+              <Button
+                href="/"
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Página inicial
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
     </Container>
   );
 };
