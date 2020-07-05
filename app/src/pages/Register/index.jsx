@@ -12,7 +12,7 @@ import {
   Modal,
   CircularProgress,
   Typography,
-  Container
+  Container,
 } from "@material-ui/core";
 import {
   DatePicker,
@@ -24,6 +24,7 @@ import axios from "axios";
 import register from "../../services/register";
 import apiorder from "../../services/apiorder";
 import Header from "../../components/Header";
+import Alert from "@material-ui/lab/Alert";
 import "./register.css";
 
 function rand() {
@@ -53,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const messageErrorApi = "Falha ao mandar os dados. Por favor tente novamente.";
+const messageErrorUser =
+  "E-mail já cadastrado! Tente novamente com outro endereço de e-mail.";
+
 const Register = (props) => {
   // state do gênero
   const [selectedGender, setselectedGender] = useState("");
@@ -72,6 +77,8 @@ const Register = (props) => {
   const [nameBlank, setNameBlank] = useState(false);
   const [surnameBlank, setSurnameBlank] = useState(false);
   const [emailBlank, setEmailBlank] = useState(false);
+  const [errorApi, setErrorApi] = useState(false);
+  const [errorUser, setErrorUser] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -146,7 +153,7 @@ const Register = (props) => {
 
     setLoading(true);
 
-    try{
+    try {
       // const newUser = await register.post("register", JSON.stringify(data));
       setLoading(false);
       // const order = {
@@ -163,10 +170,10 @@ const Register = (props) => {
       setLoading(false);
       handleOpen();
     } catch (err) {
-      console.log(err)
+      console.log(err);
       setLoading(false);
-      if (err.message.includes("406")) console.log("Já existe")
-      else console.log("outro")
+      if (err.message.includes("406")) setErrorUser(true);
+      else setErrorApi(true);
     }
   }
 
@@ -180,7 +187,8 @@ const Register = (props) => {
       />
 
       <Typography variant="h4">Cadastro</Typography>
-
+      {errorApi && <Alert severity="error">{messageErrorApi}</Alert>}
+      {errorUser && <Alert severity="info">{messageErrorUser}</Alert>}
       <Grid container>
         <Grid item xs={6}>
           <div className="field">

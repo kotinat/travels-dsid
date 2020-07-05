@@ -7,15 +7,15 @@ import {
   CircularProgress,
   Container,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
+import { getStars } from "../../controllers/starRating";
 import Header from "../../components/Header";
 import "./details.css";
 
 // import { getAccomodationDetailById } from "../../services/api"; // comentar
-
-import { getStars } from "../../controllers/starRating";
 
 const details = {
   name: "Milano Hotel",
@@ -42,6 +42,8 @@ const details = {
   },
 };
 
+const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
+
 const Details = (props) => {
   const [showDetails, setShowDetails] = useState(true); // false
   // const [details, setDetails] = useState(); // comentar
@@ -50,6 +52,7 @@ const Details = (props) => {
     details.location.latitude,
     details.location.longitude,
   ];
+  const [error, setError] = useState(false);
 
   // Chamada na API, comentado para deixar mockado
   // COMENTAR TUDO
@@ -60,7 +63,8 @@ const Details = (props) => {
   //     setShowDetails(true);
   //     setLoading(false);
   //   } catch (err) {
-  //     alert(err)
+  //     // alert(err)
+  //     setError(true)
   //     setLoading(false);
   //     props.history.push("/");
   //     console.log(err)
@@ -91,6 +95,8 @@ const Details = (props) => {
       />
 
       <Typography variant="h4">Detalhes da hospedagem</Typography>
+
+      {error && <Alert severity="error">{errorMessage}</Alert>}
       {loading && <CircularProgress color="secondary" />}
       {showDetails && (
         <div>

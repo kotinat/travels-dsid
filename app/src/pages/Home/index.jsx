@@ -4,9 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
+import Alert from "@material-ui/lab/Alert";
 // import { getCityIdByName, getAccomodationsById } from "../../services/api";
 import { testing } from "../../controllers/dateAccomodation";
 import "./home.css";
+import { useEffect } from "react";
 
 const listaHospedagens = [
   {
@@ -74,10 +76,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
+
 const Home = (props) => {
   const [data, setData] = useState([]);
   const [showList, setShowList] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const classes = useStyles();
 
   function finalPrice(days, perNight) {
@@ -111,7 +116,8 @@ const Home = (props) => {
       setShowList(true);
       setLoading(false);
     } catch (err) {
-      alert(err);
+      // alert(err);
+      setError(true);
       setLoading(false);
     }
   }
@@ -119,8 +125,8 @@ const Home = (props) => {
   return (
     <Container>
       <Header showBack={false} showFoward={false} />
+      {error && <Alert severity="error">{errorMessage}</Alert>}
       <Search onSearch={handleSearch} />
-
       {loading && <CircularProgress color="secondary" />}
       {showList && (
         <AccomodationsList
