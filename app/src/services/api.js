@@ -13,13 +13,10 @@ export const getCityIdByName = async (city) => {
         query: city,
       },
     }
-<<<<<<< HEAD
-  );
-  // console.log(result);
-=======
+
   )
   console.log(result);
->>>>>>> c6729114e57a107b505f75455e3e44cba69f8d70
+
   return result.data.suggestions[0].entities[0].destinationId;
 };
 

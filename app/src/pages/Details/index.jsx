@@ -18,35 +18,34 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { getStars } from "../../controllers/starRating";
 import Header from "../../components/Header";
 import "./details.css";
-const image =
-  "https://exp.cdn-hotels.com/hotels/32000000/31360000/31356800/31356721/2426a1c5_l.jpg";
 
-// import { getAccomodationDetailById } from "../../services/api"; // comentar
-
-const details = {
-  name: "Milano Hotel",
-  rating: 2.5,
-  price: {
-    perNight: 67,
-    final: 335,
-  },
-  amenities: [
-    "29 quartos para não fumantes",
-    "Serviço de arrumação (mediante solicitação)",
-    "Bar/lounge",
-    "Recepção 24 horas",
-    "Ar-condicionado",
-    "Um micro-ondas em uma área comum",
-    "Lavanderia",
-    "Jornais grátis no saguão",
-    "TV na área comum",
-    "Wi-Fi grátis",
-  ],
-  location: {
-    latitude: -23.49742,
-    longitude: -47.45506,
-  },
-};
+import { getAccomodationDetailById } from "../../services/api"; // comentar
+// const image =
+//   "https://exp.cdn-hotels.com/hotels/32000000/31360000/31356800/31356721/2426a1c5_l.jpg";
+// const details = {
+//   name: "Milano Hotel",
+//   rating: 2.5,
+//   price: {
+//     perNight: 67,
+//     final: 335,
+//   },
+//   amenities: [
+//     "29 quartos para não fumantes",
+//     "Serviço de arrumação (mediante solicitação)",
+//     "Bar/lounge",
+//     "Recepção 24 horas",
+//     "Ar-condicionado",
+//     "Um micro-ondas em uma área comum",
+//     "Lavanderia",
+//     "Jornais grátis no saguão",
+//     "TV na área comum",
+//     "Wi-Fi grátis",
+//   ],
+//   location: {
+//     latitude: -23.49742,
+//     longitude: -47.45506,
+//   },
+// };
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -78,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
 const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
 
 const Details = (props) => {
-  const [showDetails, setShowDetails] = useState(true); // false
-  // const [details, setDetails] = useState(); // comentar
+  const [showDetails, setShowDetails] = useState(false); // false
+  const [details, setDetails] = useState(); // comentar
   const [loading, setLoading] = useState(false);
   const position = () => [
     details.location.latitude,
@@ -90,25 +89,25 @@ const Details = (props) => {
 
   // Chamada na API, comentado para deixar mockado
   // COMENTAR TUDO
-  // async function handleSearchAccomodation(id) {
-  //   try{
-  //     const ansioso = await getAccomodationDetailById(id);
-  //     setDetails(ansioso);
-  //     setShowDetails(true);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     // alert(err)
-  //     setError(true)
-  //     setLoading(false);
-  //     props.history.push("/");
-  //     console.log(err)
-  //   }
-  // }
+  async function handleSearchAccomodation(id) {
+    try {
+      const ansioso = await getAccomodationDetailById(id);
+      setDetails(ansioso);
+      setShowDetails(true);
+      setLoading(false);
+    } catch (err) {
+      // alert(err)
+      setError(true);
+      setLoading(false);
+      props.history.push("/");
+      console.log(err);
+    }
+  }
 
   // Faz a chamada assim que o componente Details é renderizado
   useEffect(() => {
     setLoading(true);
-    // handleSearchAccomodation(props.accomodationId); // comentar
+    handleSearchAccomodation(props.accomodationId); // comentar
     props.setPrice(props.price);
     setLoading(false);
   }, []);
@@ -173,7 +172,7 @@ const Details = (props) => {
                 <div
                   className={classes.imageContainer}
                   style={{
-                    backgroundImage: `url(${image})`,
+                    backgroundImage: `url(${props.accomodationImg})`,
                   }}
                 >
                   {/* <img src="https://exp.cdn-hotels.com/hotels/32000000/31360000/31356800/31356721/2426a1c5_l.jpg" /> */}

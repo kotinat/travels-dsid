@@ -191,19 +191,21 @@ const Register = (props) => {
     setLoading(true);
 
     try {
-      // const newUser = await register.post("register", JSON.stringify(data));
+      const newUser = await register.post("register", JSON.stringify(data)); // comentar
       setLoading(false);
-      // const order = {
-      //   name: name,
-      //   accommodationId: props.accomodationId,
-      //   pricePerNight: props.price,
-      //   priceTotal: props.total(),
-      //   userId: newUser.data.user._id,
-      // };
+      // comentar
+      const order = {
+        name: name,
+        accommodationId: props.accomodationId,
+        pricePerNight: props.price,
+        priceTotal: props.total(),
+        userId: newUser.data.user._id,
+      };
 
-      // const newOrder = await apiorder.post("orders", JSON.stringify(order));
+      const newOrder = await apiorder.post("orders", JSON.stringify(order));
 
-      // props.setOrder(newOrder);
+      props.setOrder(newOrder);
+      // até aqui
       setLoading(false);
       handleOpen();
     } catch (err) {
