@@ -95,7 +95,7 @@ const Search = (props) => {
             fullWidth
             error={cityBlankField}
             helperText={cityBlankField ? "Preencha a cidade." : ""}
-            variant="outlined"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={5}>
@@ -120,26 +120,30 @@ const Search = (props) => {
         {/* <Grid item xs={7}>
           <InputLabel htmlFor="guest">Quantas pessoas vão?</InputLabel>
         </Grid> */}
-        <Grid item xs={3}>
-          <InputLabel htmlFor="guest">Quantas pessoas vão?</InputLabel>
-          <TextField
-            id="guest"
-            type="number"
-            onChange={handleGuestChange}
-            error={guestBlankField}
-            helperText={guestBlankField ? "Mínimo 1 pessoa." : ""}
-            variant="outlined"
-          />
-        </Grid>
         <Grid container justify="center">
-          <Button
-            variant="contained"
-            color="secondary"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Procurar
-          </Button>
+          <Grid item xs={3} justify="center">
+            <TextField
+              id="guest"
+              type="number"
+              onChange={handleGuestChange}
+              placeholder="tut"
+              error={guestBlankField}
+              helperText={guestBlankField ? "Mínimo 1 pessoa." : ""}
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <Grid container justify="flex-end">
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Procurar
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Container>
