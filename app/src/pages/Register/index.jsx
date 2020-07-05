@@ -13,6 +13,8 @@ import {
   CircularProgress,
   Typography,
   Container,
+  Paper,
+  Box,
 } from "@material-ui/core";
 import {
   DatePicker,
@@ -43,20 +45,49 @@ function getModalStyle() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  container: {},
+  modal: {
     position: "absolute",
     justifyContent: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    // border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(4),
+  },
+  paper: {
+    borderRadius: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    padding: theme.spacing(3),
+    margin: theme.spacing(3),
+  },
+  paperContainer: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  },
+  input: {
+    margin: theme.spacing(2),
+    marginTop: 0,
+    width: "229px",
+    minWidth: "148px",
+    // border: "1px black solid",
+  },
+  button: {
+    width: theme.spacing(15),
+    padding: theme.spacing(1),
+    margin: theme.spacing(2),
+    borderRadius: theme.spacing(1),
   },
 }));
 
 const messageErrorApi = "Falha ao mandar os dados. Por favor tente novamente.";
 const messageErrorUser =
   "E-mail já cadastrado! Tente novamente com outro endereço de e-mail.";
+const messageRequiredFields = "Preencha todos os campos obrigatórios.";
 
 const Register = (props) => {
   // state do gênero
@@ -79,6 +110,7 @@ const Register = (props) => {
   const [emailBlank, setEmailBlank] = useState(false);
   const [errorApi, setErrorApi] = useState(false);
   const [errorUser, setErrorUser] = useState(false);
+  const [errorRequiredFields, setErrorrequiredFields] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -89,12 +121,11 @@ const Register = (props) => {
   };
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Nice!</h2>
+    <div style={modalStyle} className={classes.modal}>
       <p id="simple-modal-description">Cadastro efetuado com sucesso!</p>
       <span>
-        <Link to="/payment">
-          <Button variant="contained" color="secondary">
+        <Link to="/payment" style={{ textDecoration: "none" }}>
+          <Button variant="contained" color="primary">
             Ir para o pagamento
           </Button>
         </Link>
@@ -119,6 +150,12 @@ const Register = (props) => {
     if (nameBlank === true) setNameBlank(false);
     if (surnameBlank === true) setSurnameBlank(false);
     if (emailBlank === true) setEmailBlank(false);
+    if (errorRequiredFields === true) setErrorrequiredFields(false);
+  }
+
+  function handleCancelSubmit(event) {
+    event.preventDefault();
+    props.history.push("/details");
   }
 
   async function handleSubmit(event) {
@@ -128,17 +165,17 @@ const Register = (props) => {
     const { name, surname, phoneNumber, email } = formData;
     if (name === "" || name === null) {
       setNameBlank(true);
-      alert("Por favor, preencha os campos obrigatórios marcados com *.");
+      setErrorrequiredFields(true);
       return;
     }
     if (surname === "" || surname === null) {
       setSurnameBlank(true);
-      alert("Por favor, preencha os campos obrigatórios marcados com *.");
+      setErrorrequiredFields(true);
       return;
     }
     if (email === "" || email === null) {
       setEmailBlank(true);
-      alert("Por favor, preencha os campos obrigatórios marcados com *.");
+      setErrorrequiredFields(true);
       return;
     }
 
@@ -185,114 +222,138 @@ const Register = (props) => {
         showFoward={false}
         foward={"/payment"}
       />
+      {/* <Container container width="md" justify="center"> */}
+      <Paper className={classes.paper}>
+        <Typography variant="h4">Cadastro</Typography>
+        <Typography variant="subtitle2">
+          Campos marcados com (*) são obrigatórios.
+        </Typography>
+        {errorApi && <Alert severity="error">{messageErrorApi}</Alert>}
+        {errorUser && <Alert severity="info">{messageErrorUser}</Alert>}
+        {errorRequiredFields && (
+          <Alert severity="warning">{messageRequiredFields}</Alert>
+        )}
 
-      <Typography variant="h4">Cadastro</Typography>
-      {errorApi && <Alert severity="error">{messageErrorApi}</Alert>}
-      {errorUser && <Alert severity="info">{messageErrorUser}</Alert>}
-      <Grid container>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="name">Nome*</InputLabel>
-            <TextField
-              variant="outlined"
-              type="text"
-              name="name"
-              id="name"
-              onChange={handleInputChange}
-              error={nameBlank}
-              helperText={nameBlank ? "Campo obrigatório." : ""}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="surname">Sobrenome*</InputLabel>
-            <TextField
-              variant="outlined"
-              type="text"
-              name="surname"
-              id="surname"
-              onChange={handleInputChange}
-              error={surnameBlank}
-              helperText={surnameBlank ? "Campo obrigatório." : ""}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="birthdate">Data de Nascimento</InputLabel>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                inputVariant="outlined"
-                disableFuture
-                name="birthdate"
-                id="birthdate"
-                openTo="year"
-                format="dd/MM/yyyy"
-                views={["year", "month", "date"]}
-                value={selectedDate}
-                onChange={setselectedDate}
+        <Grid className={classes.paperContainer} container justify="center">
+          <Grid container justify="center" xs={5}>
+            <Box className={classes.input}>
+              <InputLabel htmlFor="name">Nome*</InputLabel>
+              <TextField
+                variant="outlined"
+                type="text"
+                name="name"
+                id="name"
+                onChange={handleInputChange}
+                error={nameBlank}
+                helperText={nameBlank ? "Campo obrigatório." : ""}
               />
-            </MuiPickersUtilsProvider>
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="gender">Sexo</InputLabel>
-            <Select
-              variant="outlined"
-              labelId="gender"
-              id="gender"
-              value={selectedGender}
-              onChange={handleGenderChange}
-              defaultValue={"Selecione"}
+            </Box>
+          </Grid>
+
+          <Grid container justify="center" xs={5}>
+            <Box className={classes.input}>
+              <InputLabel htmlFor="surname">Sobrenome*</InputLabel>
+              <TextField
+                variant="outlined"
+                type="text"
+                name="surname"
+                id="surname"
+                onChange={handleInputChange}
+                error={surnameBlank}
+                helperText={surnameBlank ? "Campo obrigatório." : ""}
+              />
+            </Box>
+          </Grid>
+
+          <Grid container justify="center" xs={5}>
+            <Box className={classes.input}>
+              <InputLabel htmlFor="birthdate">Data de Nascimento</InputLabel>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
+                  inputVariant="outlined"
+                  disableFuture
+                  name="birthdate"
+                  id="birthdate"
+                  openTo="year"
+                  format="dd/MM/yyyy"
+                  views={["year", "month", "date"]}
+                  value={selectedDate}
+                  onChange={setselectedDate}
+                />
+              </MuiPickersUtilsProvider>
+            </Box>
+          </Grid>
+
+          <Grid container justify="center" xs={5}>
+            <Box className={classes.input}>
+              <InputLabel htmlFor="gender">Sexo</InputLabel>
+              <Select
+                variant="outlined"
+                labelId="gender"
+                id="gender"
+                value={selectedGender}
+                onChange={handleGenderChange}
+                defaultValue={"Selecione"}
+                fullWidth
+              >
+                <MenuItem value="Masculino">Masculino</MenuItem>
+                <MenuItem value="Feminino">Feminino</MenuItem>
+                <MenuItem value="Prefiro não declarar">
+                  Prefiro não declarar
+                </MenuItem>
+              </Select>
+            </Box>
+          </Grid>
+
+          <Grid container justify="center" xs={5}>
+            <Box className={classes.input}>
+              <InputLabel htmlFor="phoneNumber">Telefone</InputLabel>
+              <TextField
+                variant="outlined"
+                type="phone"
+                name="phoneNumber"
+                id="phoneNumber"
+                placeholder="(XX)XXXXX-XXXX"
+                onChange={handleInputChange}
+              />
+            </Box>
+          </Grid>
+
+          <Grid container justify="center" xs={5}>
+            <Box className={classes.input}>
+              <InputLabel htmlFor="email">E-mail*</InputLabel>
+              <TextField
+                variant="outlined"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="example.@example.com"
+                onChange={handleInputChange}
+                error={emailBlank}
+                helperText={emailBlank ? "Campo obrigatório." : ""}
+              />
+            </Box>
+          </Grid>
+          <Grid container justify="center" xs={12}>
+            <Button
+              onClick={handleCancelSubmit}
+              variant="contained"
+              color="primary"
+              className={classes.button}
             >
-              <MenuItem value="Masculino">Masculino</MenuItem>
-              <MenuItem value="Feminino">Feminino</MenuItem>
-              <MenuItem value="Prefiro não declarar">
-                Prefiro não declarar
-              </MenuItem>
-            </Select>
-          </div>
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSubmit}
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              Enviar
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <div className="field">
-            <InputLabel htmlFor="phoneNumber">Telefone</InputLabel>
-            <TextField
-              variant="outlined"
-              type="phone"
-              name="phoneNumber"
-              id="phoneNumber"
-              placeholder="(XX)XXXXX-XXXX"
-              onChange={handleInputChange}
-            />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          {" "}
-          <div className="field">
-            <InputLabel htmlFor="email">E-mail*</InputLabel>
-            <TextField
-              variant="outlined"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="example.@example.com"
-              onChange={handleInputChange}
-              error={emailBlank}
-              helperText={emailBlank ? "Campo obrigatório." : ""}
-            />
-          </div>
-        </Grid>
-        <Button
-          onClick={handleSubmit}
-          href="/payment"
-          variant="contained"
-          color="secondary"
-        >
-          Enviar
-        </Button>
-        {loading && <CircularProgress color="secondary" />}
+        {loading && <CircularProgress color="primary" />}
         <Modal
           open={open}
           onClose={handleClose}
@@ -301,8 +362,9 @@ const Register = (props) => {
         >
           {body}
         </Modal>
-      </Grid>
+      </Paper>
     </Container>
+    // </Container>
   );
 };
 
