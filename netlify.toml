@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "/app/App.jsx"
+  status = 200
