@@ -23,6 +23,7 @@ import register from "../../services/register";
 import apiorder from "../../services/apiorder";
 import Header from "../../components/Header";
 import Alert from "@material-ui/lab/Alert";
+import ScrollDialog from "../../components/ScrollDialog";
 import "./register.css";
 
 function rand() {
@@ -75,6 +76,10 @@ const useStyles = makeStyles((theme) => ({
     minWidth: theme.spacing(14),
     margin: theme.spacing(2),
     borderRadius: theme.spacing(1),
+  },
+  loading: {
+    display: "flex",
+    justifyContent: "center",
   },
 }));
 
@@ -338,6 +343,11 @@ const Register = (props) => {
                   />
                 </Box>
               </Grid>
+
+              <Grid className={classes.button} container justify="center">
+                <ScrollDialog />
+              </Grid>
+
               <Grid container justify="center" xs={12}>
                 <Button
                   onClick={handleCancelSubmit}
@@ -357,7 +367,11 @@ const Register = (props) => {
                 </Button>
               </Grid>
             </Grid>
-            {loading && <CircularProgress color="primary" />}
+            {loading && (
+              <Box className={classes.loading}>
+                <CircularProgress size={70} color="primary" />
+              </Box>
+            )}
             <Modal
               open={open}
               onClose={handleClose}

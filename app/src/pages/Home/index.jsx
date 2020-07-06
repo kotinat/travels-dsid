@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, CircularProgress } from "@material-ui/core";
+import { Container, CircularProgress, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
@@ -68,13 +68,13 @@ const listaHospedagens = [
   },
 ];
 
-// const useStyles = makeStyles((theme) => ({
-//   inputs: {
-//     "& > *": {
-//       margin: theme.spacing(),
-//     },
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  loading: {
+    marginTop:theme.spacing(2),
+    display: "flex",
+    justifyContent: "center",
+  },
+}));
 
 const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
 
@@ -83,7 +83,7 @@ const Home = (props) => {
   const [showList, setShowList] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  // const classes = useStyles();
+  const classes = useStyles();
 
   function finalPrice(days, perNight) {
     return days * perNight;
@@ -128,7 +128,12 @@ const Home = (props) => {
         <Header showBack={false} showFoward={false} />
         <Search onSearch={handleSearch} />
         {error && <Alert severity="error">{errorMessage}</Alert>}
-        {loading && <CircularProgress color="primary" />}
+        {loading && (
+          <Box className={classes.loading}>
+            {" "}
+            <CircularProgress size={70} color="primary" />{" "}
+          </Box>
+        )}
         {showList && (
           <AccomodationsList
             data={data}

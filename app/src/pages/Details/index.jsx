@@ -72,6 +72,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1),
     width: theme.spacing(14),
   },
+  loading: {
+    display:"flex",
+    justifyContent: "center",
+  },
 }));
 
 const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
@@ -125,13 +129,20 @@ const Details = (props) => {
     <Container>
       <Header
         back={"/"}
-        showBack={true}
+        showBack={false}
         foward={"/register"}
-        showFoward={true}
+        showFoward={false}
       />
 
       {error && <Alert severity="error">{errorMessage}</Alert>}
-      {loading && <CircularProgress color="secondary" />}
+
+      {loading && (
+        <Box className={classes.loading}>
+          {" "}
+          <CircularProgress size={70} color="primary" />{" "}
+        </Box>
+      )}
+
       {showDetails && (
         <Grid container justify="center">
           <Grid item xs={9} justify="center">
