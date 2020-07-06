@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 
 import { getStars } from "../../controllers/starRating";
-import { te } from "date-fns/locale";
 
 const useStyles = makeStyles((theme) => ({
   root: {

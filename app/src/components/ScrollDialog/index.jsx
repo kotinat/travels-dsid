@@ -35,7 +35,7 @@ export default function ScrollDialog() {
         onClick={handleClickOpen("paper")}
         variant="outlined"
         color="primary"
-        style={{borderRadius: "8px"}}
+        style={{ borderRadius: "8px" }}
       >
         Termos de uso
       </Button>

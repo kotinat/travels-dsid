@@ -12,7 +12,7 @@ import "./header.css";
 const useStyles = makeStyles((theme) => ({
   header: {
     "& > *": {
-      margin: theme.spacing(2),
+      margin: theme.spacing(4),
     },
   },
 }));
@@ -21,7 +21,9 @@ const Header = (props) => {
   const classes = useStyles();
   return (
     <header className={classes.header}>
-      <img className="logo" src={logo} />
+      <a href="/">
+        <img className="logo" alt="Trip Findr" src={logo} />
+      </a>
       {props.showBack && <Link to={props.back}>Voltar</Link>}
       {props.showFoward && <Link to={props.foward}>Avançar</Link>}
       <div>
@@ -37,7 +39,7 @@ const Header = (props) => {
         <a href="https://github.com/kotinat/travels-dsid">
           <GitHubIcon color="action" />
         </a>
-        <a href="https://www.youtube.com/">
+        <a href="https://www.youtube.com/watch?v=MOtGPX2Opqw&feature=youtu.be">
           <YouTubeIcon color="action" />
         </a>
       </div>

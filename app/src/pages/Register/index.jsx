@@ -192,20 +192,20 @@ const Register = (props) => {
     setLoading(true);
 
     try {
-      // const newUser = await register.post("register", JSON.stringify(data)); // comentar
+      const newUser = await register.post("register", JSON.stringify(data)); // comentar
       setLoading(false);
       // comentar
-      // const order = {
-      //   name: name,
-      //   accommodationId: props.accomodationId,
-      //   pricePerNight: props.price,
-      //   priceTotal: props.total(),
-      //   userId: newUser.data.user._id,
-      // };
+      const order = {
+        name: name,
+        accommodationId: props.accomodationId,
+        pricePerNight: props.price,
+        priceTotal: props.total(),
+        userId: newUser.data.user._id,
+      };
 
-      // const newOrder = await apiorder.post("orders", JSON.stringify(order));
+      const newOrder = await apiorder.post("orders", JSON.stringify(order));
 
-      // props.setOrder(newOrder);
+      props.setOrder(newOrder);
       // até aqui
       setLoading(false);
       handleOpen();
@@ -225,7 +225,6 @@ const Register = (props) => {
         showFoward={false}
         foward={"/payment"}
       />
-      {/* <Container container width="md" justify="center"> */}
       <Grid container justify="center">
         <Grid item xs={9}>
           <Paper className={classes.paper}>
@@ -384,7 +383,6 @@ const Register = (props) => {
         </Grid>
       </Grid>
     </Container>
-    // </Container>
   );
 };
 

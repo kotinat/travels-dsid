@@ -64,14 +64,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const name = "Natalia";
-const priceTotal = "599";
-const _id = "fuw98fqnjr23kj42";
-const accommodationName = "Vila Sésamo";
+// const name = "Natalia";
+// const priceTotal = "599";
+// const _id = "fuw98fqnjr23kj42";
+// const accommodationName = "Vila Sésamo";
 
 const Payment = (props) => {
-  // const accommodationName = props.accomodation.name; // comentar
-  // const { name, priceTotal, _id } = props.order.data.accommodationOrder; // comentar
+  const accommodationName = props.accomodation.name; // comentar
+  const { name, priceTotal, _id } = props.order.data.accommodationOrder; // comentar
   // state do modal
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
