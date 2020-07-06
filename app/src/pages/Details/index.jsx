@@ -20,6 +20,7 @@ import Header from "../../components/Header";
 import "./details.css";
 
 import { getAccomodationDetailById } from "../../services/api"; // comentar
+
 // const image =
 //   "https://exp.cdn-hotels.com/hotels/32000000/31360000/31356800/31356721/2426a1c5_l.jpg";
 // const details = {
@@ -60,8 +61,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(2),
     minWidth: theme.spacing(30),
     minHeight: theme.spacing(30),
-    // maxWidth: theme.spacing(45),
-    // maxHeight: theme.spacing(45),
     backgroundSize: "cover",
     backgroundPosition: "center center",
     boxShadow: "0px 8px 20px rgba(34, 35, 58, 0.3)",
@@ -71,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     borderRadius: theme.spacing(1),
+    width: theme.spacing(14),
+  },
+  loading: {
+    display: "flex",
+    justifyContent: "center",
   },
 }));
 
@@ -91,12 +95,12 @@ const Details = (props) => {
   // COMENTAR TUDO
   async function handleSearchAccomodation(id) {
     try {
+      setLoading(true);
       const ansioso = await getAccomodationDetailById(id);
       setDetails(ansioso);
       setShowDetails(true);
       setLoading(false);
     } catch (err) {
-      // alert(err)
       setError(true);
       setLoading(false);
       props.history.push("/");
@@ -118,25 +122,34 @@ const Details = (props) => {
     props.history.push("/register");
   }
 
+  function handleCancel() {
+    props.history.push("/");
+  }
+
   return (
     <Container>
       <Header
         back={"/"}
-        showBack={true}
+        showBack={false}
         foward={"/register"}
-        showFoward={true}
+        showFoward={false}
       />
 
       {error && <Alert severity="error">{errorMessage}</Alert>}
-      {loading && <CircularProgress color="secondary" />}
+
+      {loading && (
+        <Box className={classes.loading}>
+          <CircularProgress size={70} color="primary" />
+        </Box>
+      )}
+
       {showDetails && (
-        <div>
-          <Grid container justify="center">
-            {/* <Typography variant="h5">Detalhes da hospedagem</Typography> */}
-            <Paper className={classes.paper} maxWidth="md">
-              <div className="content">
+        <Grid container justify="center">
+          <Grid item xs={9} justify="center">
+            <Paper className={classes.paper}>
+              <div className="content-info">
                 <Typography className={classes.items} variant="h4">
-                  {details.name}
+                  <Box fontWeight="fontWeightBold">{details.name}</Box>
                 </Typography>
                 <Typography variant="body1">
                   <Box
@@ -165,25 +178,28 @@ const Details = (props) => {
                 </Typography>
               </div>
 
-              <div className="content">
-                {/* <div>
-                <img src={props.accomodationImg} />
-              </div> */}
+              <div className="content-image">
                 <div
                   className={classes.imageContainer}
                   style={{
-                    backgroundImage: `url(${props.accomodationImg})`,
+                    backgroundImage: `url(${props.accomodationImg})`, //props.accomodationImg
                   }}
-                >
-                  {/* <img src="https://exp.cdn-hotels.com/hotels/32000000/31360000/31356800/31356721/2426a1c5_l.jpg" /> */}
-                </div>
+                ></div>
                 <Typography
                   className={classes.items}
                   variant="h6"
-                >{`${props.price}/noite`}</Typography>
-                <Typography className={classes.items} variant="h5">
-                  {`Total da estadia, ${props.total()}`}
+                >{`R$${props.price}/por noite`}</Typography>
+                <Typography className={classes.items} variant="h4">
+                  <Box fontWeight="fontWeightBold">{`R$${props.total()}, total`}</Box>
                 </Typography>
+                <Button
+                  className={classes.button}
+                  onClick={handleCancel}
+                  variant="contained"
+                  color="primary"
+                >
+                  Cancelar
+                </Button>
                 <Button
                   className={classes.button}
                   onClick={handlePickAccomodation}
@@ -196,26 +212,23 @@ const Details = (props) => {
             </Paper>
           </Grid>
 
-          {/* <Paper className={classes.paper} maxWidth="sm"> */}
-          {/* <Grid container justify="center"> */}
-          <div className="leaflet-wrapper">
-            <div className="leaflet-container">
-              <Map center={position()} zoom={15}>
-                <TileLayer
-                  attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  // height="200px"
-                />
-                <Marker position={position()}>
-                  <Popup>{details.name}</Popup>
-                </Marker>
-              </Map>
+          <Grid item xs={9}>
+            <div className="leaflet-wrapper">
+              <div className="leaflet-container">
+                <Map center={position()} zoom={15}>
+                  <TileLayer
+                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    height="200px"
+                  />
+                  <Marker position={position()}>
+                    <Popup>{details.name}</Popup>
+                  </Marker>
+                </Map>
+              </div>
             </div>
-          </div>
-          {/* </Grid> */}
-
-          {/* </Paper> */}
-        </div>
+          </Grid>
+        </Grid>
       )}
     </Container>
   );

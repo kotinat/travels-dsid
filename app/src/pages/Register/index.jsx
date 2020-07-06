@@ -16,17 +16,14 @@ import {
   Paper,
   Box,
 } from "@material-ui/core";
-import {
-  DatePicker,
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import axios from "axios";
 import register from "../../services/register";
 import apiorder from "../../services/apiorder";
 import Header from "../../components/Header";
 import Alert from "@material-ui/lab/Alert";
+import ScrollDialog from "../../components/ScrollDialog";
 import "./register.css";
 
 function rand() {
@@ -74,13 +71,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     width: "229px",
     minWidth: "148px",
-    // border: "1px black solid",
   },
   button: {
-    width: theme.spacing(15),
-    padding: theme.spacing(1),
+    minWidth: theme.spacing(14),
     margin: theme.spacing(2),
     borderRadius: theme.spacing(1),
+  },
+  loading: {
+    display: "flex",
+    justifyContent: "center",
   },
 }));
 
@@ -105,6 +104,7 @@ const Register = (props) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  // state validações do form
   const [nameBlank, setNameBlank] = useState(false);
   const [surnameBlank, setSurnameBlank] = useState(false);
   const [emailBlank, setEmailBlank] = useState(false);
@@ -125,7 +125,11 @@ const Register = (props) => {
       <p id="simple-modal-description">Cadastro efetuado com sucesso!</p>
       <span>
         <Link to="/payment" style={{ textDecoration: "none" }}>
-          <Button variant="contained" color="primary">
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+          >
             Ir para o pagamento
           </Button>
         </Link>
@@ -139,9 +143,6 @@ const Register = (props) => {
     setselectedGender(event.target.value);
   };
 
-  // const handleDateChange = (event) => {
-  //   setselectedDate(event.target.value);
-  // };
   // função que captura interação de input, genericamente
   // assim não é preciso fazer um handle para cada campo
   function handleInputChange(event) {
@@ -224,149 +225,164 @@ const Register = (props) => {
         showFoward={false}
         foward={"/payment"}
       />
-      {/* <Container container width="md" justify="center"> */}
-      <Paper className={classes.paper}>
-        <Typography variant="h4">Cadastro</Typography>
-        <Typography variant="subtitle2">
-          Campos marcados com (*) são obrigatórios.
-        </Typography>
-        {errorApi && <Alert severity="error">{messageErrorApi}</Alert>}
-        {errorUser && <Alert severity="info">{messageErrorUser}</Alert>}
-        {errorRequiredFields && (
-          <Alert severity="warning">{messageRequiredFields}</Alert>
-        )}
+      <Grid container justify="center">
+        <Grid item xs={9}>
+          <Paper className={classes.paper}>
+            <Typography variant="h4">
+              <Box fontWeight="fontWeightBold">Cadastro</Box>
+            </Typography>
+            <Typography variant="subtitle2">
+              Campos marcados com (*) são obrigatórios.
+            </Typography>
+            {errorApi && <Alert severity="error">{messageErrorApi}</Alert>}
+            {errorUser && <Alert severity="info">{messageErrorUser}</Alert>}
+            {errorRequiredFields && (
+              <Alert severity="warning">{messageRequiredFields}</Alert>
+            )}
 
-        <Grid className={classes.paperContainer} container justify="center">
-          <Grid container justify="center" xs={5}>
-            <Box className={classes.input}>
-              <InputLabel htmlFor="name">Nome*</InputLabel>
-              <TextField
-                variant="outlined"
-                type="text"
-                name="name"
-                id="name"
-                onChange={handleInputChange}
-                error={nameBlank}
-                helperText={nameBlank ? "Campo obrigatório." : ""}
-              />
-            </Box>
-          </Grid>
+            <Grid className={classes.paperContainer} container justify="center">
+              <Grid container justify="center" xs={5}>
+                <Box className={classes.input}>
+                  <InputLabel htmlFor="name">Nome*</InputLabel>
+                  <TextField
+                    variant="outlined"
+                    type="text"
+                    name="name"
+                    id="name"
+                    onChange={handleInputChange}
+                    error={nameBlank}
+                    helperText={nameBlank ? "Campo obrigatório." : ""}
+                  />
+                </Box>
+              </Grid>
 
-          <Grid container justify="center" xs={5}>
-            <Box className={classes.input}>
-              <InputLabel htmlFor="surname">Sobrenome*</InputLabel>
-              <TextField
-                variant="outlined"
-                type="text"
-                name="surname"
-                id="surname"
-                onChange={handleInputChange}
-                error={surnameBlank}
-                helperText={surnameBlank ? "Campo obrigatório." : ""}
-              />
-            </Box>
-          </Grid>
+              <Grid container justify="center" xs={5}>
+                <Box className={classes.input}>
+                  <InputLabel htmlFor="surname">Sobrenome*</InputLabel>
+                  <TextField
+                    variant="outlined"
+                    type="text"
+                    name="surname"
+                    id="surname"
+                    onChange={handleInputChange}
+                    error={surnameBlank}
+                    helperText={surnameBlank ? "Campo obrigatório." : ""}
+                  />
+                </Box>
+              </Grid>
 
-          <Grid container justify="center" xs={5}>
-            <Box className={classes.input}>
-              <InputLabel htmlFor="birthdate">Data de Nascimento</InputLabel>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <DatePicker
-                  inputVariant="outlined"
-                  disableFuture
-                  name="birthdate"
-                  id="birthdate"
-                  openTo="year"
-                  format="dd/MM/yyyy"
-                  views={["year", "month", "date"]}
-                  value={selectedDate}
-                  onChange={setselectedDate}
-                />
-              </MuiPickersUtilsProvider>
-            </Box>
-          </Grid>
+              <Grid container justify="center" xs={5}>
+                <Box className={classes.input}>
+                  <InputLabel htmlFor="birthdate">
+                    Data de Nascimento
+                  </InputLabel>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker
+                      inputVariant="outlined"
+                      disableFuture
+                      name="birthdate"
+                      id="birthdate"
+                      openTo="year"
+                      format="dd/MM/yyyy"
+                      views={["year", "month", "date"]}
+                      value={selectedDate}
+                      onChange={setselectedDate}
+                    />
+                  </MuiPickersUtilsProvider>
+                </Box>
+              </Grid>
 
-          <Grid container justify="center" xs={5}>
-            <Box className={classes.input}>
-              <InputLabel htmlFor="gender">Sexo</InputLabel>
-              <Select
-                variant="outlined"
-                labelId="gender"
-                id="gender"
-                value={selectedGender}
-                onChange={handleGenderChange}
-                defaultValue={"Selecione"}
-                fullWidth
-              >
-                <MenuItem value="Masculino">Masculino</MenuItem>
-                <MenuItem value="Feminino">Feminino</MenuItem>
-                <MenuItem value="Prefiro não declarar">
-                  Prefiro não declarar
-                </MenuItem>
-              </Select>
-            </Box>
-          </Grid>
+              <Grid container justify="center" xs={5}>
+                <Box className={classes.input}>
+                  <InputLabel htmlFor="gender">Sexo</InputLabel>
+                  <Select
+                    variant="outlined"
+                    labelId="gender"
+                    id="gender"
+                    value={selectedGender}
+                    onChange={handleGenderChange}
+                    defaultValue={"Selecione"}
+                    fullWidth
+                  >
+                    <MenuItem value="Masculino">Masculino</MenuItem>
+                    <MenuItem value="Feminino">Feminino</MenuItem>
+                    <MenuItem value="Prefiro não declarar">
+                      Prefiro não declarar
+                    </MenuItem>
+                  </Select>
+                </Box>
+              </Grid>
 
-          <Grid container justify="center" xs={5}>
-            <Box className={classes.input}>
-              <InputLabel htmlFor="phoneNumber">Telefone</InputLabel>
-              <TextField
-                variant="outlined"
-                type="phone"
-                name="phoneNumber"
-                id="phoneNumber"
-                placeholder="(XX)XXXXX-XXXX"
-                onChange={handleInputChange}
-              />
-            </Box>
-          </Grid>
+              <Grid container justify="center" xs={5}>
+                <Box className={classes.input}>
+                  <InputLabel htmlFor="phoneNumber">Telefone</InputLabel>
+                  <TextField
+                    variant="outlined"
+                    type="phone"
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    placeholder="(XX)XXXXX-XXXX"
+                    onChange={handleInputChange}
+                  />
+                </Box>
+              </Grid>
 
-          <Grid container justify="center" xs={5}>
-            <Box className={classes.input}>
-              <InputLabel htmlFor="email">E-mail*</InputLabel>
-              <TextField
-                variant="outlined"
-                type="email"
-                name="email"
-                id="email"
-                placeholder="example.@example.com"
-                onChange={handleInputChange}
-                error={emailBlank}
-                helperText={emailBlank ? "Campo obrigatório." : ""}
-              />
-            </Box>
-          </Grid>
-          <Grid container justify="center" xs={12}>
-            <Button
-              onClick={handleCancelSubmit}
-              variant="contained"
-              color="primary"
-              className={classes.button}
+              <Grid container justify="center" xs={5}>
+                <Box className={classes.input}>
+                  <InputLabel htmlFor="email">E-mail*</InputLabel>
+                  <TextField
+                    variant="outlined"
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="example.@example.com"
+                    onChange={handleInputChange}
+                    error={emailBlank}
+                    helperText={emailBlank ? "Campo obrigatório." : ""}
+                  />
+                </Box>
+              </Grid>
+
+              <Grid className={classes.button} container justify="center">
+                <ScrollDialog />
+              </Grid>
+
+              <Grid container justify="center" xs={12}>
+                <Button
+                  onClick={handleCancelSubmit}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Enviar
+                </Button>
+              </Grid>
+            </Grid>
+            {loading && (
+              <Box className={classes.loading}>
+                <CircularProgress size={70} color="primary" />
+              </Box>
+            )}
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
             >
-              Cancelar
-            </Button>
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Enviar
-            </Button>
-          </Grid>
+              {body}
+            </Modal>
+          </Paper>
         </Grid>
-        {loading && <CircularProgress color="primary" />}
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          {body}
-        </Modal>
-      </Paper>
+      </Grid>
     </Container>
-    // </Container>
   );
 };
 

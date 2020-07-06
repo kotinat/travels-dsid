@@ -13,8 +13,7 @@ export const getCityIdByName = async (city) => {
         query: city,
       },
     }
-
-  )
+  );
   console.log(result);
 
   return result.data.suggestions[0].entities[0].destinationId;
@@ -36,11 +35,12 @@ export const getAccomodationsById = async (
       pageNumber: 1,
       checkIn: entryDate,
       checkOut: departureDate,
-      pageSize: 5,
+      pageSize: 20,
       adults1: 2,
       currency: "BRL",
+      sortOrder: "BEST_SELLER",
     },
-  })
+  });
   const parsedResult = result.data.data.body.searchResults.results.map(
     (item) => ({
       id: item.id,
@@ -72,7 +72,7 @@ export const getAccomodationDetailById = async (id) => {
         id: id,
       },
     }
-  )
+  );
   const { data } = result.data;
   const { body } = data;
   const { name, starRating } = body.propertyDescription;

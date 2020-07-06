@@ -1,3 +1,7 @@
-.field-group{
+.field-group {
   display: flex;
+}
+
+body {
+  margin: 0;
 }

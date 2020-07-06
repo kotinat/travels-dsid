@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { Container, CircularProgress } from "@material-ui/core";
+import { Container, CircularProgress, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import AccomodationsList from "../../components/AccomodationsList";
 import Alert from "@material-ui/lab/Alert";
-import { getCityIdByName, getAccomodationsById } from "../../services/api";
+import { getCityIdByName, getAccomodationsById } from "../../services/api"; // comentar
 import { testing } from "../../controllers/dateAccomodation";
 import "./home.css";
-import { useEffect } from "react";
 
 // const listaHospedagens = [
 //   {
@@ -68,13 +67,13 @@ import { useEffect } from "react";
 //   },
 // ];
 
-// const useStyles = makeStyles((theme) => ({
-//   inputs: {
-//     "& > *": {
-//       margin: theme.spacing(),
-//     },
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  loading: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    justifyContent: "center",
+  },
+}));
 
 const errorMessage = "Falha ao buscar dos dados. Por favor tente novamente.";
 
@@ -83,7 +82,7 @@ const Home = (props) => {
   const [showList, setShowList] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  // const classes = useStyles();
+  const classes = useStyles();
 
   function finalPrice(days, perNight) {
     return days * perNight;
@@ -115,8 +114,8 @@ const Home = (props) => {
       setData(accomodationsList); // accomodationsList
       setShowList(true);
       setLoading(false);
+      setError(false);
     } catch (err) {
-      // alert(err);
       setError(true);
       setLoading(false);
     }
@@ -128,8 +127,12 @@ const Home = (props) => {
         <Header showBack={false} showFoward={false} />
         {error && <Alert severity="error">{errorMessage}</Alert>}
         <Search onSearch={handleSearch} />
-
-        {loading && <CircularProgress color="secondary" />}
+        {loading && (
+          <Box className={classes.loading}>
+            {" "}
+            <CircularProgress size={70} color="primary" />{" "}
+          </Box>
+        )}
         {showList && (
           <AccomodationsList
             data={data}
