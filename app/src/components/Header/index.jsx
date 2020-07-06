@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 import logo from "../../assets/img/tripFindr.png";
 import "./header.css";
 
@@ -31,6 +33,12 @@ const Header = (props) => {
         </a>
         <a href="https://www.instagram.com/">
           <InstagramIcon color="action" />
+        </a>
+        <a href="https://github.com/kotinat/travels-dsid">
+          <GitHubIcon color="action" />
+        </a>
+        <a href="https://www.youtube.com/">
+          <YouTubeIcon color="action" />
         </a>
       </div>
     </header>
